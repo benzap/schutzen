@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+
+		html {
+			height: 100%;
+		}
+
+		body {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
+
+		#game-container {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			background-color: black;
+		}
+
+		</style>
+	</head>
+	<body>
+		<div id="game-container"></div>
+		<script type="text/javascript" src="resources/public/js/schutzen.js"></script>
+		<script type="text/javascript">
+		domRoot = document.getElementById("game-container")
+		//schutzen.core.run(domRoot);
+		</script>
+	</body>
+</html>
