@@ -1,0 +1,7 @@
+#+TITLE:       Readme for Schutzen
+#+AUTHOR:      Benjamin Zaporzan
+#+EMAIL:       benzaporzan@gmail.com
+#+DESCRIPTION: Readme for schutzen
+#+KEYWORDS:    game,clojure
+#+LANGUAGE:    en
+#+OPTIONS:     H:2 num:t toc:t \n:nil ::t |:t ^:t f:t tex:t
