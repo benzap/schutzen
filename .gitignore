@@ -9,4 +9,14 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
-/resources/public/js/
+
+!resources/
+resources/*
+
+!resources/public
+resources/public/*
+
+!resources/public/js
+resources/public/js/*
+
+!resources/public/js/third_party
