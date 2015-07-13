@@ -1,5 +1,6 @@
 (ns schutzen.core
   (:require [schutzen.utils :refer [log]]
+            [schutzen.display :as display]
             [schutzen.globals :refer[*schutzen-active*]]))
 
 (.log js/console "hello schtuzen!")
