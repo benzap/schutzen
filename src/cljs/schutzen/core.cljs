@@ -35,12 +35,20 @@
         {:keys [prompt-startup?]
          :or {:prompt-startup? false}} opts
         ;; Scene Containers
-        containers (init-scene-containers root-dom)
-        ;; Instantiating Scenes
-        status-scene (create-status-scene (:top-left-container containers))]
+        containers (init-scene-containers root-dom)]
     
-    ;;initialize, and place our game scenes
-    (reset! scene-list [status-scene])
+    ;; initialize, and place our game scenes
+    (reset! scene-list
+            [
+             ;; top-left status bar scene
+             (create-status-scene (:top-left-container containers))
+
+             ;; top-middle map scene
+             ;; ...
+
+             ;; bottom game scene
+             ;; ...
+             ])
 
     ;;Initialize our scenes
     (doseq [scene @scene-list]

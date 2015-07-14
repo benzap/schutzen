@@ -4,10 +4,14 @@
             [schutzen.scenes.scene :refer [SceneRender]]
             [schutzen.canvas.two.core :as c2d]))
 
+
+
 (defrecord StatusBar [context]
   SceneRender
   (init-scene [_ state]
-    (log "Initializing Status Bar"))
+    (log "Initializing Status Bar")
+    (log (c2d/fill-canvas context "green"))
+    )
   (run-scene [_ state]
     (log "Running Status Bar"))
   (render-scene [_ state delta-ms]

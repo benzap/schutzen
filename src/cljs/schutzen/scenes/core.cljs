@@ -40,7 +40,6 @@
     ;;place the containers within our provided dom element
     
     ;;style main container and fit to 4:3 aspect ratio
-    (log "dom wat" dom)
     (.appendChild dom main-container)
     (doto main-container
       (.setAttribute "class" "schutzen-main")
