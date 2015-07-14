@@ -1,1 +1,2 @@
-(ns schutzen.actors.actor "Derived type for each actor")
+(ns schutzen.actors.actor
+  "Derived type for each actor")

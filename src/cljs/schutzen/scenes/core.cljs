@@ -14,8 +14,9 @@
       (/ 480)
       (* (or val 1))))
 
-(defn init-scenes
-  "Sets up the scene containers"
+(defn init-scene-containers
+  "Sets up the scene containers, and returns a map of dom containers
+  for scene instantiation"
   [dom]
   (let [dom-width (.-clientWidth dom)
         dom-height (.-clientHeight dom)
@@ -35,12 +36,11 @@
         ;;bottom container
         inner-bottom-container (.createElement js/document "div")
         
-        ;;Scenes
-        
         ]
     ;;place the containers within our provided dom element
     
     ;;style main container and fit to 4:3 aspect ratio
+    (log "dom wat" dom)
     (.appendChild dom main-container)
     (doto main-container
       (.setAttribute "class" "schutzen-main")
@@ -126,6 +126,7 @@
     (let [height (* (/ 6 7) (.-offsetHeight main-container))
           top (* (/ 1 7) (.-offsetHeight main-container))]
       (doto inner-bottom-container
+        (.setAttribute "class" "schutzen-bottom")
         (aset "style" "position" "absolute")
         (aset "style" "height" (str height "px"))
         (aset "style" "top" (str top "px"))
@@ -133,6 +134,8 @@
         (aset "style" "right" 0)
         ))
 
-    
-    
+    ;;Map containing our scene containers for scene instantiation
+    {:inner-bottom-container inner-bottom-container
+     :top-left-container top-left-container
+     :top-middle-container top-middle-container}
     ))
