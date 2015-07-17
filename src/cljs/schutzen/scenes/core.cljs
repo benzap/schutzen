@@ -1,18 +1,7 @@
 (ns schutzen.scenes.core
   "entry point facade for manipulating each scene"
   (:require [schutzen.display :as display]
-            [schutzen.utils :refer [log]]))
-
-(defn rel-scale
-  "Represents a factor on the scale of the original game, based on
-  screen resolution. The returned value is multiplied by the relative
-  scale"
-  [& [val]]
-  (-> js/document
-      (.querySelector ".schutzen-main")
-      (.-offsetHeight)
-      (/ 480)
-      (* (or val 1))))
+            [schutzen.utils :refer [log rel-scale]]))
 
 (defn init-scene-containers
   "Sets up the scene containers, and returns a map of dom containers
