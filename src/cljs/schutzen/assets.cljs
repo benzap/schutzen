@@ -4,9 +4,10 @@
   progress, and failure."
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [schutzen.utils :refer [log]]
+            [schutzen.state :as state]
             [cljs.core.async
              :as async
-             :refer [put! chan <! close!]]))
+             :refer [put! chan <! close! pipe]]))
 
 (def asset-images
   (atom
@@ -15,11 +16,6 @@
     
 
     }))
-  
-(defn get-image
-  "Retrieve an image asset by the given keyword name"
-  [name]
-  (-> @asset-images name :image))
 
 (defn download-image
   "Downloads the image from the given url"
@@ -55,3 +51,18 @@
               image (<! image-chan)]
           (swap! asset-images assoc-in [name :image] image)
           )))))
+
+(defn get-image
+  "Retrieve an image asset by the given keyword name provided in the
+  asset-images dictionary. If the file doesn't exist in the assets,
+  the file is downloaded."
+  [name]
+  (let [out (chan)
+        image (-> @asset-images name :image)]
+    (if image
+      (put! out image)
+      (let [assets-path (-> @state/app :assets-path)
+            url (-> @asset-images name :url)
+            full-path (str assets-path "/" url)]
+        (pipe (download-image full-path) out))
+  )))

@@ -2,7 +2,7 @@
   (:require [schutzen.utils :refer [log]]
             [schutzen.display :as display]
             [schutzen.assets :as assets]
-            [schutzen.state :refer [game-state]]
+            [schutzen.state :as state]
             [schutzen.scenes.core
              :refer [init-scene-containers]]
             [schutzen.scenes.scene :as scene]
@@ -19,12 +19,12 @@
   (.requestAnimationFrame js/window render)
   (when *schutzen-active*
     (doseq [scene @scene-list]
-      (scene/render-scene scene game-state (/ 1 60)))))
+      (scene/render-scene scene state/game (/ 1 60)))))
 
 (defn ^:export run []
   (reset! *schutzen-active* true)
   (doseq [scene @scene-list]
-    (scene/run-scene scene game-state))
+    (scene/run-scene scene state/game))
   (render))
 
 (defn ^:export pause []
@@ -38,11 +38,17 @@
          :or {:prompt-startup? false}} opts
         ;; Scene Containers
         containers (init-scene-containers root-dom)]
-
+    
+    ;;initialize our app-state
+    (state/init)
+    
+    ;;update our assets-path, if provided
+    (when assets-path
+      (swap! state/app assoc-in [:assets-path] assets-path))
+    
     ;;Load our assets
     (log "Loading Assets...")
     (assets/load-images assets-path)
-    (log "Done Loading Assets...")
     
     ;; initialize, and place our game scenes
     (reset! scene-list
@@ -59,7 +65,7 @@
     
     ;;Initialize our scenes
     (doseq [scene @scene-list]
-      (scene/init-scene scene game-state))
+      (scene/init-scene scene state/game))
     
     (when-not prompt-startup?
       (run))))
