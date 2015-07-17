@@ -6,12 +6,14 @@
   (:require [schutzen.utils :refer [log]]
             [cljs.core.async
              :as async
-             :refer [put! take! chan <! >! close!]]))
+             :refer [put! chan <! close!]]))
 
 (def asset-images
   (atom
    ;;Image Assets
-   {:dot {:url "dot.png"} ;;test
+   {:dot {:url "dot.png"}
+    
+
     }))
   
 (defn get-image
