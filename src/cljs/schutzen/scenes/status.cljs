@@ -8,7 +8,6 @@
             [schutzen.canvas.two.core :as c2d]
             [cljs.core.async :as async :refer [<!]]))
 
-
 (defn show-life-count [context]
   (let [num (-> @state/game :life)
         life-image (assets/get-image :dot)]
@@ -16,7 +15,7 @@
       (c2d/draw-image
        context
        (<! life-image)
-       0 0 100 100))))
+       0 0 64 64))))
 
 (defrecord StatusBar [context]
   SceneRender
@@ -32,4 +31,4 @@
     (log "Pausing Status Bar")))
 
 (defn create-status-scene [dom]
-  (->StatusBar (c2d/init dom)))
+  (->StatusBar (c2d/init dom 300 150)))
