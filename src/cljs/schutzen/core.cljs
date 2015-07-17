@@ -1,6 +1,7 @@
 (ns schutzen.core
   (:require [schutzen.utils :refer [log]]
             [schutzen.display :as display]
+            [schutzen.assets :as assets]
             [schutzen.state :refer [game-state]]
             [schutzen.scenes.core
              :refer [init-scene-containers]]
@@ -32,10 +33,16 @@
 (defn ^:export init [root-dom opts]
   (let [opts (or opts #js {})
         opts (js->clj opts :keywordize-keys true)
-        {:keys [prompt-startup?]
+        {:keys [prompt-startup?
+                assets-path]
          :or {:prompt-startup? false}} opts
         ;; Scene Containers
         containers (init-scene-containers root-dom)]
+
+    ;;Load our assets
+    (log "Loading Assets...")
+    (assets/load-images assets-path)
+    (log "Done Loading Assets...")
     
     ;; initialize, and place our game scenes
     (reset! scene-list
@@ -49,7 +56,7 @@
              ;; bottom game scene
              ;; ...
              ])
-
+    
     ;;Initialize our scenes
     (doseq [scene @scene-list]
       (scene/init-scene scene game-state))
