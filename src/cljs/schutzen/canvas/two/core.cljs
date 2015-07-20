@@ -20,17 +20,27 @@
         (aset "canvas" "height" cheight))
     context)))
 
-(defn fill-canvas
-  [context & [color]]
-  (let [color (or color "black")
-        [width height] (dims context)]
-    (doto context
-      (aset "fillStyle" color)
-      (.fillRect 0 0 width height))))
+(defn clear [context]
+  (.clearRect context 0 0
+              (-> context .-canvas .-width)
+              (-> context .-canvas .-height)))
 
 (defn draw-image
   "Draw the given image to screen's relative scale"
   [context img x y width height]
   (.drawImage context img x y
               width height))
-            
+
+(defn draw-text
+  "Draw the provided text at the given x,y coordinates and with the
+  given font family and size"
+  [context text x y &
+   {:keys [size family color]
+    :or {size 14
+         family "Monospace"
+         color "#FFFFFF"}}]
+  (doto context
+    (aset "fillStyle" color)
+    (aset "font" (str size "px " family)))
+
+  (.fillText context text x y))

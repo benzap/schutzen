@@ -23,3 +23,18 @@
   (reset!
    app
    {:assets-path "/resources/public"}))
+
+(defn ^:export add-score! [amt]
+  (swap! game update-in [:score] + amt))
+
+(defn ^:export add-life! [amt]
+  (swap! game update-in [:life] + amt))
+
+(defn ^:export remove-life! [amt]
+  (swap! game update-in [:life] - amt))
+
+(defn ^:export add-bomb! [amt]
+  (swap! game update-in [:bomb] + amt))
+
+(defn ^:export remove-bomb! [amt]
+  (swap! game update-in [:bomb] - amt))

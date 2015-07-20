@@ -13,9 +13,7 @@
   (atom
    ;;Image Assets
    {:dot {:url "dot.png"}
-    
-
-    }))
+    :bomb {:url "bomb.png"}}))
 
 (defn download-image
   "Downloads the image from the given url"
@@ -58,8 +56,9 @@
   the file is downloaded."
   [name]
   (let [out (chan)
-        image (-> @asset-images name :image)]
-    (if image
+        image (-> @asset-images name :image)
+        _ (log "Image" image)]
+    (if-not (nil? image)
       (put! out image)
       (let [assets-path (-> @state/app :assets-path)
             url (-> @asset-images name :url)

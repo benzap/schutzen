@@ -8,25 +8,57 @@
             [schutzen.canvas.two.core :as c2d]
             [cljs.core.async :as async :refer [<!]]))
 
-(defn show-life-count [context]
-  (let [num (-> @state/game :life)
-        life-image (assets/get-image :dot)]
-    (go
+(defn show-life-count [context life]
+  (let [life-image (assets/get-image :dot)]
+    #_(go
       (c2d/draw-image
        context
        (<! life-image)
-       0 0 64 64))))
+       0 0 32 32))))
+
+(defn show-bomb-count [context bombs]
+  (let [bomb-image (assets/get-image :bomb)]
+    (go
+      (let [img (<! bomb-image)]
+        (when (>= bombs 1)
+          (c2d/draw-image context img
+                          260 65 24 16))
+        
+        (when (>= bombs 2)
+          (c2d/draw-image context img
+                          260 85 24 16))
+
+        (when (>= bombs 3)
+          (c2d/draw-image context img
+                          260 105 24 16))
+      
+      ))))
+
+(defn show-score [context score]
+  (let [score (str score)
+        cnt (count score)
+        nzeroes (apply str (repeat (- 7 cnt) "0"))
+        score (str nzeroes score)]
+    (c2d/draw-text context score 15 110
+                   :color "#00FFFF"
+                   :size 60)))
 
 (defrecord StatusBar [context]
   SceneRender
   (init-scene [_ state]
     (log "Initializing Status Bar")
-    (show-life-count context)
+    (show-life-count context (:life @state))
+    (show-bomb-count context (:bombs @state))
+    (show-score context (:score @state))
     )
   (run-scene [_ state]
     (log "Running Status Bar"))
   (render-scene [_ state delta-ms]
-    (log "Rendering Status Bar" delta-ms))
+    ;;(c2d/clear context)
+    
+    (show-life-count context (:life @state))
+    (show-bomb-count context (:bombs @state))
+    (show-score context (:score @state)))
   (pause-scene [_ state]
     (log "Pausing Status Bar")))
 
