@@ -3,9 +3,9 @@
   (:require [schutzen.utils :refer [log rel-scale]]))
 
 (defn init
-  "Creates a <canvas> that fills the current dom element, rel-width
-  and rel-height represent the relative dimensions of the canvas, and
-  all 2d canvas commands will abide to this relative scale"
+  "Creates a <canvas> that fills the current dom element, cwidth and
+  cheight represent the relative dimensions of the canvas, and all 2d
+  canvas commands will abide to these dimensions"
   [dom cwidth cheight]
   (let [dom-canvas (.createElement js/document "canvas")]
     (.appendChild dom dom-canvas)

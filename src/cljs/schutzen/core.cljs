@@ -7,7 +7,8 @@
              :refer [init-scene-containers]]
             [schutzen.scenes.scene :as scene]
             [schutzen.scenes.status :refer [create-status-scene]]
-            [schutzen.globals :refer[*schutzen-active*]]))
+            [schutzen.scenes.main :refer [create-main-scene]]
+            [schutzen.globals :refer [*schutzen-active*]]))
 
 (log "Welcome to Schutzen!")
 
@@ -61,7 +62,7 @@
              ;; ...
 
              ;; bottom game scene
-             ;; ...
+             (create-main-scene (:inner-bottom-container containers))
              ])
     
     ;;Initialize our scenes
