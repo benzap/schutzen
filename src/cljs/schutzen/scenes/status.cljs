@@ -9,30 +9,36 @@
             [cljs.core.async :as async :refer [<!]]))
 
 (defn show-life-count [context life]
-  (let [life-image (assets/get-image :dot)]
-    #_(go
-      (c2d/draw-image
-       context
-       (<! life-image)
-       0 0 32 32))))
+  (when-let [img (assets/get-image :ship)]
+    (when (>= life 1)
+      (c2d/draw-image context img 20 35 48 16))
+
+    (when (>= life 2)
+      (c2d/draw-image context img 70 35 48 16))
+
+    (when (>= life 3)
+      (c2d/draw-image context img 120 35 48 16))
+
+    (when (>= life 4)
+      (c2d/draw-image context img 170 35 48 16))
+
+    (when (>= life 5)
+      (c2d/draw-image context img 220 35 48 16))
+    
+    ))
 
 (defn show-bomb-count [context bombs]
-  (let [bomb-image (assets/get-image :bomb)]
-    (go
-      (let [img (<! bomb-image)]
-        (when (>= bombs 1)
-          (c2d/draw-image context img
-                          260 65 24 16))
-        
-        (when (>= bombs 2)
-          (c2d/draw-image context img
-                          260 85 24 16))
-
-        (when (>= bombs 3)
-          (c2d/draw-image context img
-                          260 105 24 16))
-      
-      ))))
+  (when-let [img (assets/get-image :bomb)]
+    (when (>= bombs 1)
+      (c2d/draw-image context img
+                      260 65 24 16))
+    (when (>= bombs 2)
+      (c2d/draw-image context img
+                      260 85 24 16))
+    (when (>= bombs 3)
+      (c2d/draw-image context img
+                      260 105 24 16))
+      ))
 
 (defn show-score [context score]
   (let [score (str score)
@@ -46,16 +52,11 @@
 (defrecord StatusBar [context]
   SceneRender
   (init-scene [_ state]
-    (log "Initializing Status Bar")
-    (show-life-count context (:life @state))
-    (show-bomb-count context (:bombs @state))
-    (show-score context (:score @state))
-    )
+    (log "Initializing Status Bar"))
   (run-scene [_ state]
     (log "Running Status Bar"))
   (render-scene [_ state delta-ms]
-    ;;(c2d/clear context)
-    
+    (c2d/clear context)
     (show-life-count context (:life @state))
     (show-bomb-count context (:bombs @state))
     (show-score context (:score @state)))

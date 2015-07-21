@@ -13,5 +13,5 @@
                         :output-dir "resources/public/js"
                         :optimizations :whitespace
                         :pretty-print true
-                        :source-map "resources/public/js/schutzen.js.map"
+                        ;;:source-map "resources/public/js/schutzen.js.map"
                         }}]})

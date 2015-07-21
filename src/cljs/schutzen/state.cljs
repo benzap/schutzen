@@ -16,7 +16,7 @@
   (reset!
    game
    {:score 0
-    :life 3
+    :life 5
     :bombs 3
     :level 0
     :actors []})
@@ -34,7 +34,7 @@
   (swap! game update-in [:life] - amt))
 
 (defn ^:export add-bomb! [amt]
-  (swap! game update-in [:bomb] + amt))
+  (swap! game update-in [:bombs] + amt))
 
 (defn ^:export remove-bomb! [amt]
-  (swap! game update-in [:bomb] - amt))
+  (swap! game update-in [:bombs] - amt))

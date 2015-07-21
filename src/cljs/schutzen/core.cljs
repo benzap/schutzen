@@ -48,6 +48,7 @@
     
     ;;Load our assets
     (log "Loading Assets...")
+    
     (assets/load-images assets-path)
     
     ;; initialize, and place our game scenes
