@@ -20,7 +20,7 @@
 (defn init-camera
   "initialize and create camera"
   [fov aspect-ratio near far]
-  (THREE.PerspectiveCamera fov aspect-ratio near far))
+  (THREE.PerspectiveCamera. fov aspect-ratio near far))
 
 (defn init
   "initialize and return renderer, scene, and camera.
