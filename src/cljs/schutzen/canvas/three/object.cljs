@@ -2,6 +2,19 @@
   "Includes protocols for manipulating the THREE.Object3D types"
   (:require [schutzen.utils :refer [log]]))
 
+(defprotocol IObject
+  (id [this])
+  (name [this])
+  (uuid [this])
+  (parent [this]))
+
+(extend-protocol IObject
+  THREE.Object3D
+  (id [this] (.-id this))
+  (name [this] (.-name this))
+  (uuid [this] (.-uuid this))
+  (parent [this] (.-parent this)))
+
 (defprotocol ITranslate
   (translate! [this x y z]))
 
@@ -33,9 +46,27 @@
     (.updateMatrix this)))
 
 (defprotocol IChildLookup
-  (get-by-name [this name]))
+  (get-by-name [this pname])
+  (get-by-id [this id]))
 
 (extend-protocol IChildLookup
   THREE.Object3D
-  (get-by-name [this name]
-    (.getObjectByName this)))
+  (get-by-name [this pname]
+    (.getObjectByName this (name pname)))
+  (get-by-id [this id]
+    (.getObjectById this id)))
+
+(defprotocol IChildCollection
+  (add-child! [this child-object])
+  (remove-child! [this child-object]))
+
+(extend-protocol IChildCollection
+  THREE.Object3D
+  (add-child! [this child-object]
+    (.add this child-object))
+  (remove-child! [this child-object]
+    (.remove this child-object)))
+
+(defn create []
+  (THREE.Object3D.))
+

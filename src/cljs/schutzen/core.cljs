@@ -1,5 +1,7 @@
 (ns schutzen.core
-  (:require [schutzen.utils :refer [log]]
+  (:require-macros [cljs.core.async.macros :as am :refer [go]])
+  (:require [cljs.core.async :refer [chan close!]]
+            [schutzen.utils :refer [log timeout]]
             [schutzen.display :as display]
             [schutzen.assets :as assets]
             [schutzen.state :as state]
@@ -9,6 +11,8 @@
             [schutzen.scenes.status :refer [create-status-scene]]
             [schutzen.scenes.main-scene.init :refer [create-main-scene]]
             [schutzen.globals :refer [*schutzen-active*]]))
+
+(declare -init)
 
 (log "Welcome to Schutzen!")
 
@@ -39,7 +43,6 @@
          :or {:prompt-startup? false}} opts
         ;; Scene Containers
         containers (init-scene-containers root-dom)]
-    
     ;;initialize our app-state
     (state/init)
     
@@ -47,11 +50,23 @@
     (when assets-path
       (swap! state/app assoc-in [:assets-path] assets-path))
     
-    ;;Load our assets
+    ;;Load our assets. This will block...
     (log "Loading Assets...")
-    
     (assets/load-images assets-path)
-    
+
+    (go    
+      (loop [retries 5]
+        (if-not (assets/assets-loaded?)
+          (do
+            (<! (timeout 1000))
+            (if-not (zero? retries)
+              (recur (dec retries))
+              (log "Failed to load all assets")))
+          (do
+            (log "Loaded Assets!")
+            (-init root-dom opts containers)))))))
+
+(defn -init [root-dom opts containers]
     ;; initialize, and place our game scenes
     (reset! scene-list
             [
@@ -69,6 +84,5 @@
     (doseq [scene @scene-list]
       (scene/init-scene scene state/game))
     
-    (when-not prompt-startup?
-      (run))))
-
+    ;;Run the game
+    (run))

@@ -9,6 +9,8 @@
              :as async
              :refer [put! chan <! close! pipe take!]]))
 
+(def *assets-loaded* true)
+
 (def asset-images
   (atom
    ;;Image Assets
@@ -25,7 +27,8 @@
            ;; Success Function
            (fn [image]
              (log "Downloaded <--" url)
-             (put! image-chan image))
+             (put! image-chan image)
+             (close! image-chan))
 
            ;; Progress Function
            (fn [xhr]
@@ -45,10 +48,10 @@
   (doseq [[name data] @asset-images]
     (let [url (:url data)
           full-path (str root-path "/" url)]
-      (take!
-       (download-image full-path)
-       (fn [image]
-         (swap! asset-images assoc-in [name :image] image))))))
+      (go
+        (let [image-chan (download-image full-path)
+              image (<! image-chan)]
+          (swap! asset-images assoc-in [name :image] image))))))
 
 (defn get-image
   "Retrieve an image asset by the given keyword name provided in the
@@ -56,3 +59,5 @@
   [name]
   (-> @asset-images name :image))
     
+(defn assets-loaded? []
+  (not-any? nil? (map #(-> % :image) (vals @asset-images))))
