@@ -1,6 +1,6 @@
 (ns schutzen.canvas.three.texture
   (:require [schutzen.canvas.three.object :as object]
-            [schuzten.assets :as assets]))
+            [schutzen.assets :as assets]))
 
 (defn create [image]
   (THREE.Texture. image))

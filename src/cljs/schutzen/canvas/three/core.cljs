@@ -29,7 +29,7 @@
   (let [renderer (init-renderer dom)
         scene (init-scene)
         camera (init-camera 45 (/ 1065 685) 0.1 1000)]
-    (-> camera .-position (.set 0 6 0))
+    (-> camera .-position (.set 0 -6 0))
     (.add scene camera)
     {:renderer renderer
      :scene scene

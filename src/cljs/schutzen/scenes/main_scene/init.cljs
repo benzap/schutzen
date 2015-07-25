@@ -5,18 +5,23 @@
             [schutzen.scenes.scene :refer [SceneRender]]
             [schutzen.canvas.three.core :as c3d]
             [schutzen.canvas.three.object :as object]
+            [schutzen.actors.ship :as ship]
             ))
 
-
 (defrecord MainScene [renderer scene camera]
-    SceneRender
+  SceneRender
   (init-scene [_ state]
     (log "Initializing Main Scene"))
+
   (run-scene [_ state]
-    (log "Running Main Scene"))
+    (let [ship-actor (ship/create)]
+      (log "Ship Actor" ship-actor)
+      (log "Camera" camera)
+      (.add scene ship-actor)))
+
   (render-scene [_ state delta-ms]
-    (log "Rendering Main Scene")
     (.render renderer scene camera))
+
   (pause-scene [_ state]
     (log "Pausing Main Scene")))
 

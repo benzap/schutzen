@@ -1,7 +1,8 @@
 (ns schutzen.actors.actor
   "An actor is an Object3D instance, or derivative, which contains properties
   obtained through the IActor protocol"
-  (:require [schutzen.canvas.three.object :as object]))
+  (:require [schutzen.canvas.three.object :as object]
+            [schutzen.utils :refer [log]]))
 
 (defprotocol IActor
   (set-prop! [_ name value])
@@ -14,10 +15,9 @@
   (get-prop [this pname]
     (aget this "userData" (name pname))()))
 
-(defn define
+(defn create
   "Define an actor, with a given set of properties"
-  [actor-name & kvprops]
+  [actor-object & {:keys [actor-name]}]
   (let [actor (object/create)]
-    (doseq [[prop-name prop-key] (partition 2 kvprops)]
-      (set-prop! actor prop-name prop-key))
-    (aset actor "name" (name actor-name))))
+    (aset actor "name" (name actor-name))
+    actor))
