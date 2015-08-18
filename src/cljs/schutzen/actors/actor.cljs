@@ -1,22 +1,20 @@
 (ns schutzen.actors.actor
-  "An actor is an Object3D instance, or derivative, which contains properties
-  obtained through the IActor protocol"
-  (:require [schutzen.canvas.three.object :as object]
-            [schutzen.utils :refer [log]]))
+  "Is the simplest representation of something you would draw on the
+  main scene canvas. Certain aspects of the actor uses mutable values
+  in order to be more performant."
+  (:require [schutzen.utils :refer [log]]
+            [schutzen.physics.core :as physics]))
 
-(defprotocol IActor
-  (set-prop! [_ name value])
-  (get-prop [_ name]))
+(defonce id-count (atom 0))
 
-(extend-protocol IActor
-  THREE.Object3D
-  (set-prop! [this pname value]
-    (aset this "userData" (name pname) value))
-  (get-prop [this pname]
-    (aget this "userData" (name pname))()))
+(defrecord Actor 
+    [name
+     id
+     type
+     physics
+     custom-props])
 
-(defn create
-  "Define an actor, with a given set of properties"
-  [actor & {:keys [actor-name]}]
-  (aset actor "name" (name actor-name))
-  actor)
+(defn create [name type]
+  (let [id (swap! id-count inc)
+        physics (physics/create)]))
+
