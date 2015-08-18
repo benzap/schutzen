@@ -3,7 +3,10 @@
             [schutzen.assets :as assets]))
 
 (defn create [image]
-  (THREE.Texture. image))
+  (let [texture (THREE.Texture. image)]
+    (aset texture "needsUpdate" true)
+    (aset image "onload" (fn [] (aset texture "needsUpdate" true)))
+    texture))
 
 (defn create-from-asset 
   "loads a texture from an asset. note that this won't work correctly

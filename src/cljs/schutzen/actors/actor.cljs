@@ -17,7 +17,6 @@
 
 (defn create
   "Define an actor, with a given set of properties"
-  [actor-object & {:keys [actor-name]}]
-  (let [actor (object/create)]
-    (aset actor "name" (name actor-name))
-    actor))
+  [actor & {:keys [actor-name]}]
+  (aset actor "name" (name actor-name))
+  actor)

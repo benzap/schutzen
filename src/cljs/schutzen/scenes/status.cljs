@@ -11,19 +11,19 @@
 (defn show-life-count [context life]
   (when-let [img (assets/get-image :ship)]
     (when (>= life 1)
-      (c2d/draw-image context img 20 35 48 16))
+      (c2d/draw-image context img 20 35 48 48))
 
     (when (>= life 2)
-      (c2d/draw-image context img 70 35 48 16))
+      (c2d/draw-image context img 70 35 48 48))
 
     (when (>= life 3)
-      (c2d/draw-image context img 120 35 48 16))
+      (c2d/draw-image context img 120 35 48 48))
 
     (when (>= life 4)
-      (c2d/draw-image context img 170 35 48 16))
+      (c2d/draw-image context img 170 35 48 48))
 
     (when (>= life 5)
-      (c2d/draw-image context img 220 35 48 16))
+      (c2d/draw-image context img 220 35 48 48))
     
     ))
 

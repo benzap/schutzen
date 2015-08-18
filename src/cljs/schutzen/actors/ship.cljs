@@ -11,5 +11,7 @@
   []
   (let [sprite-object (sprite/create-with-asset :ship)
         ship-actor (actor/create sprite-object :actor-name :ship)]
+    (aset ship-actor "scale" (THREE.Vector3. 3 3 3))
+    (aset ship-actor "position" (THREE.Vector3. 1 0 0))
     ship-actor))
 

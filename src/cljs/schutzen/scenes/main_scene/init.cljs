@@ -15,9 +15,10 @@
 
   (run-scene [_ state]
     (let [ship-actor (ship/create)]
+      (.add scene ship-actor)
       (log "Ship Actor" ship-actor)
       (log "Camera" camera)
-      (.add scene ship-actor)))
+      (object/translate! camera 0 0 20)))
 
   (render-scene [_ state delta-ms]
     (.render renderer scene camera))
@@ -27,3 +28,4 @@
 
 (defn create-main-scene [dom]
   (map->MainScene (c3d/init dom)))
+ 

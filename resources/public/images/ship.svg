@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="48"
-   height="16"
+   width="64"
+   height="64"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="ship.svg"
-   inkscape:export-filename="C:\Users\TinaRuth\projects\schutzen\resources\public\images\ship.png"
+   inkscape:export-filename="C:\Users\benzap\projects\schutzen\resources\public\images\ship.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -27,17 +27,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="15.839192"
-     inkscape:cx="25.178825"
-     inkscape:cy="13.477975"
+     inkscape:zoom="11.2"
+     inkscape:cx="30.352992"
+     inkscape:cy="36.963384"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      width="48px"
-     inkscape:window-width="1600"
-     inkscape:window-height="837"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-width="1618"
+     inkscape:window-height="1031"
+     inkscape:window-x="58"
+     inkscape:window-y="-4"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -47,7 +47,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -55,10 +55,10 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-1036.3622)">
+     transform="translate(0,-988.3622)">
     <g
        id="g3777"
-       transform="matrix(1.0302331,0,0,1.1382488,-1.4468363,-143.29698)">
+       transform="matrix(1.3703386,0,0,1.5140129,-2.0979142,-580.78258)">
       <rect
          y="1036.6355"
          x="14.494024"
