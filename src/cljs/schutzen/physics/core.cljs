@@ -1,10 +1,15 @@
 (ns schutzen.physics.core
-  "Includes records for representing physics in an Actor")
+  "Includes records for representing physics in an Actor"
+  (:require [schutzen.physics.array2 :refer [aa ax+ ay+ a++]]
+            [schutzen.utils :refer [log]]))
 
-(defrecord Physics [position velocity acceleration])
+(defrecord Physics
+    [position velocity acceleration])
 
-(defn create []
+(defn create 
+  "Actor component"
+  []
   (map->Physics 
-   :position (js/Array. 0 0 0)
-   :velocity (js/Array. 0 0 0)
-   :acceleration (js/Array. 0 0 0)))
+   {:position (aa 0 0)
+    :velocity (aa 0 0)
+    :acceleration (aa 0 0)}))
