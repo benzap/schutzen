@@ -5,6 +5,8 @@
 
 (defn create 
   "Create the ship actor"
-  [])
+  []
+  (let [ship-actor (actor/create "ship" :player)]
+    ship-actor))
 
 

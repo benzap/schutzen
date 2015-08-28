@@ -3,7 +3,8 @@
   main scene canvas. Certain aspects of the actor uses mutable values
   in order to be more performant."
   (:require [schutzen.utils :refer [log]]
-            [schutzen.physics.core :as physics]))
+            [schutzen.physics.core :as physics]
+            [schutzen.graphics.core :as graphics]))
 
 (defonce id-count (atom 0))
 
@@ -12,9 +13,17 @@
      id
      type
      physics
-     custom-props])
+     sprite
+     collision])
 
 (defn create [name type]
   (let [id (swap! id-count inc)
-        physics (physics/create)]))
+        physics (physics/create)]
+    (map->Actor
+     {:name name
+      :id id
+      :type type
+      :physics physics
+      :sprite nil
+      :collision nil})))
 
