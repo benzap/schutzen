@@ -1,4 +1,4 @@
-(ns schutzen.physics.array2
+(ns schutzen.array2
   "Set of helpful functions for manipulating 2d arrays")
 
 (defn aa 
@@ -85,3 +85,9 @@
   [a a2]
   (ax* a (ax a2))
   (ay* a (ay a2)))
+
+(defn a==
+  "Set the current array to the given array values provided in a2"
+  [a a2]
+  (aset a 0 (ax a2))
+  (aset a 1 (ay a2)))

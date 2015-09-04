@@ -18,7 +18,11 @@
       (doto context
         (aset "canvas" "width" cwidth)
         (aset "canvas" "height" cheight))
-    context)))
+      (log "Context" context)
+      (.moveTo context 150 0)
+      context)))
+
+
 
 (defn clear [context]
   (.clearRect context 0 0

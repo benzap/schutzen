@@ -48,5 +48,5 @@
 (defn transform-actors! [f & args]
   (apply swap! game update-in [:actors] f args))
 
-(defn ^:export add-actors! [& actors]
-  (transform-actors! concat actors))
+(defn ^:export add-actor! [actor]
+  (transform-actors! conj actor))
