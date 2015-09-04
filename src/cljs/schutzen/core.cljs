@@ -10,6 +10,7 @@
             [schutzen.scenes.scene :as scene]
             [schutzen.scenes.status :refer [create-status-scene]]
             [schutzen.scenes.main-scene.init :refer [create-main-scene]]
+            [schutzen.event :as event]
             [schutzen.globals :refer [*schutzen-active*]]))
 
 (declare -init)
@@ -24,7 +25,8 @@
   (.requestAnimationFrame js/window render)
   (when *schutzen-active*
     (doseq [scene @scene-list]
-      (scene/render-scene scene state/game (/ 1 60)))))
+      (scene/render-scene scene state/game (/ 1 60)))
+    (event/run-timer-system (/ 1 60))))
 
 (defn ^:export run []
   (reset! *schutzen-active* true)
