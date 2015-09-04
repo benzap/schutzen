@@ -15,7 +15,11 @@
     (log "Initializing Main Scene")
     (let [ship-actor (ship/create)]
       (a== (-> ship-actor :physics :position) 
-           (aa 300 140))
+           (aa 0 140))
+      (a== (-> ship-actor :physics :velocity)
+           (aa 10 0))
+      (a== (-> ship-actor :physics :acceleration)
+           (aa 15 0))
       (log "Ship" ship-actor)
       (log "Graphics" @(-> ship-actor :graphics))
 

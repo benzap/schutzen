@@ -8,6 +8,11 @@
         y (or y 0)]
     (js/Array. x y)))
 
+(defn ac 
+  "Create copy of an array"
+  [a]
+  (aa (ax a) (ay a)))
+
 (defn ax 
   "Get x component of 2d array"
   [a]
@@ -68,7 +73,8 @@
   "add the second array to the first array"
   [a a2]
   (ax+ a (ax a2))
-  (ay+ a (ay a2)))
+  (ay+ a (ay a2))
+  a)
 
 (defn a- [a1 a2]
   (aa (- (ax a1) (ax a2))
@@ -90,4 +96,12 @@
   "Set the current array to the given array values provided in a2"
   [a a2]
   (aset a 0 (ax a2))
-  (aset a 1 (ay a2)))
+  (aset a 1 (ay a2))
+  a)
+
+(defn a**i 
+  "multiply array by a scalar"
+  [a i]
+  (ax* a i)
+  (ay* a i)
+  a)

@@ -11,6 +11,7 @@
             [schutzen.scenes.status :refer [create-status-scene]]
             [schutzen.scenes.main-scene.init :refer [create-main-scene]]
             [schutzen.event :as event]
+            [schutzen.physics.engine]
             [schutzen.globals :refer [*schutzen-active*]]))
 
 (declare -init)
@@ -26,7 +27,8 @@
   (when *schutzen-active*
     (doseq [scene @scene-list]
       (scene/render-scene scene state/game (/ 1 60)))
-    (event/run-timer-system (/ 1 60))))
+    (event/run-timer-system (/ 1 60))
+    (schutzen.physics.engine/run-engine (-> @state/game :actors) (/ 1 60))))
 
 (defn ^:export run []
   (reset! *schutzen-active* true)
