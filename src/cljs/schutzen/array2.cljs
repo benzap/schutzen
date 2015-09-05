@@ -1,5 +1,35 @@
 (ns schutzen.array2
-  "Set of helpful functions for manipulating 2d arrays")
+  "Simple and helpful functions for manipulating 2d arrays. This is a set
+  of functions for manipulating a mutable js/Array instance, and
+  treats it like a 2d array. This is useful for the domain of 2d games.
+  
+  Examples:
+
+  (def array1 (aa 1 2))
+  (def array2 (aa 3 4))
+
+  (ax array1) ; 1
+  (ay array1) ; 2
+
+  ;; add the contents of array2 to array1 and returns array1. array1 will now have the
+  ;; contents of array2
+  (a++ array1 array2) ; (aa 4 6)
+
+  ;; to add contents, and return a new array
+  (a++ (ac array1) array2) ; (aa 4 6)
+
+  ;; scalar multiplication
+  (a**i array1 2) ; (aa 8 12)
+
+  ;; component addition, multiplication
+  (ax+ array1 4) ; (aa 12 12)
+  (ax* array1 2) ; (aa 24 12)
+
+  (a** array1 (/ 1 12)) ; (aa 1 2)
+
+  ;; assign new values to 2d array. array1 will now be (aa 0 0)
+  (a== array1 (a 0 0)) ; (aa 0 0)
+")
 
 (defn aa 
   "Create 2d array from provided x and y values"
@@ -9,7 +39,7 @@
     (js/Array. x y)))
 
 (defn ac 
-  "Create copy of an array"
+  "Create copy of a 2d array"
   [a]
   (aa (ax a) (ay a)))
 
@@ -87,7 +117,7 @@
   (ay- a (ay a2)))
 
 (defn a**
-  "multiply the second array to the first array"
+  "component-wise multiply the second array to the first array"
   [a a2]
   (ax* a (ax a2))
   (ay* a (ay a2)))
