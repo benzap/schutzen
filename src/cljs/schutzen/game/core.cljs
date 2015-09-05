@@ -3,7 +3,8 @@
             [schutzen.actors.ship :as ship]
             [schutzen.game.player :as player]
             [schutzen.state :as state]
-            [schutzen.array2 :refer [aa a==]]))
+            [schutzen.array2 :refer [aa a==]]
+            [schutzen.physics.damping :as damping]))
 
 (defn start-game []
   (let [ship-actor (ship/create)]

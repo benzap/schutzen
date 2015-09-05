@@ -4,7 +4,8 @@
             [schutzen.actors.actor :as actor]
             [schutzen.assets :as assets]
             [schutzen.graphics.core :as graphics]
-            [schutzen.array2 :refer [ay= ax=]]))
+            [schutzen.array2 :refer [ay= ax=]]
+            [schutzen.physics.damping :as damping]))
 
 (defn create 
   "Create the ship actor"
@@ -12,6 +13,8 @@
   (let [ship-actor (actor/create "ship" :player)
         ship-sprite-right (graphics/create-sprite (assets/get-image :ship) 48 16)]
     (reset! (-> ship-actor :graphics) ship-sprite-right)
+    (damping/add-damping! ship-actor 0.5 :x-axis-only true)
+    (log "Ship" ship-actor)
     ship-actor))
 
 ;; How fast the ship ascends and descends in elevation
