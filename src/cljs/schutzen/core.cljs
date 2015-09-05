@@ -12,7 +12,8 @@
             [schutzen.scenes.main-scene.init :refer [create-main-scene]]
             [schutzen.event :as event]
             [schutzen.physics.engine]
-            [schutzen.globals :refer [*schutzen-active*]]))
+            [schutzen.globals :refer [*schutzen-active*]]
+            [schutzen.game.core :as game]))
 
 (declare -init)
 
@@ -34,6 +35,7 @@
   (reset! *schutzen-active* true)
   (doseq [scene @scene-list]
     (scene/run-scene scene state/game))
+  (game/start-game)
   (render))
 
 (defn ^:export pause []

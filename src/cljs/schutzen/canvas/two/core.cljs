@@ -17,7 +17,8 @@
         (aset "style" "height" (str height "px")))
       (doto context
         (aset "canvas" "width" cwidth)
-        (aset "canvas" "height" cheight))
+        (aset "canvas" "height" cheight)
+        (aset "imageSmoothingEnabled" false))
       (log "Context" context)
       (.moveTo context 150 0)
       context)))

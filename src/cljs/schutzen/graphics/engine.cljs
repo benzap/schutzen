@@ -1,8 +1,9 @@
 (ns schutzen.graphics.engine
+  "This grabs all of the actors within the game state, and draws them
+  onto the screen."
   (:require [schutzen.utils :refer [log]]
             [schutzen.array2 :refer [ax ay]]
-            [schutzen.graphics.core :as graphics]
-            [schutzen.state :as state]))
+            [schutzen.graphics.core :as graphics]))
 
 (defn draw-actor
   "Takes an Actor, and draws it onto the given canvas"
@@ -16,6 +17,6 @@
 (defn run-engine
   "Grabs all of the actors currently contained in the game state, and
   draws them onto the screen."
-  [canvas game-state]
-  (doseq [actor (-> game-state :actors)]
+  [canvas actors]
+  (doseq [actor actors]
     (draw-actor canvas actor)))

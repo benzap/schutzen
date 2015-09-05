@@ -61,7 +61,7 @@
 (defn ay*
   "multiply to array's y component"
   [a y]
-  (aset a 1 (* (ax a) y)))
+  (aset a 1 (* (ay a) y)))
 
 (defn a+ 
   "add arrays and return a new array"
