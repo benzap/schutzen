@@ -16,7 +16,9 @@
    ;;Image Assets
    {:dot {:url "dot.png"}
     :bomb {:url "bomb.png"}
-    :ship {:url "ship.png"}}))
+    :ship {:url "ship.png"}
+    :placeholder {:url "placeholder.png"}
+    }))
 
 (defn download-image
   "Downloads the image from the given url"

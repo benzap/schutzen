@@ -1,0 +1,16 @@
+* Programming Tasks
+** TODO Physics [100%]
+   - [X] actors move based on position, velocity, acceleration
+   - [X] setup force generators
+** TODO Collision [0%]
+   - [ ] Simple BB Collision
+** TODO Graphics [50%]
+   - [X] Draw sprites
+   - [ ] Draw with respect to viewport
+** TODO Events [100%]
+   - [X] Event Handling for Keyboard
+   - [X] Event Handling for Timeouts
+** TODO AI [0%]
+   - [ ] Develop AI System
+   - [ ] FSM for game 
+   - [ ] FSM for enemies

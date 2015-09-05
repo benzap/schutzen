@@ -13,7 +13,8 @@
             [schutzen.event :as event]
             [schutzen.physics.engine]
             [schutzen.globals :refer [*schutzen-active*]]
-            [schutzen.game.core :as game]))
+            [schutzen.game.core :as game]
+            [schutzen.actors.ship]))
 
 (declare -init)
 
@@ -70,6 +71,14 @@
               (log "Failed to load all assets")))
           (do
             (log "Loaded Assets!")
+
+            ;;
+            ;; Actor Sprite Initialization
+            ;;
+            (log "Initializing Actor Assets...")
+            (schutzen.actors.ship/init-sprites)
+
+            ;; Initializing the scenes
             (-init root-dom opts containers)))))))
 
 (defn -init [root-dom opts containers]

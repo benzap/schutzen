@@ -50,3 +50,16 @@
  (when-let [ship-actor @player-actor]
    (ship/move-stop ship-actor)
    ))
+
+;; Thrust Right
+(on-keydown
+ (:thrust player-controls)
+ (when-let [ship-actor @player-actor]
+   (ship/thrust-left ship-actor)
+   ))
+
+(on-keyup
+ (:thrust player-controls)
+ (when-let [ship-actor @player-actor]
+   (ship/thrust-stop ship-actor)
+   ))

@@ -1,4 +1,7 @@
 (ns schutzen.event
+  "Contains wrappers around the window for keyboard events. Provides a
+  simpler system for tracking when the key and pressed and
+  depressed. Could be expanded on to track key combinations."
   (:require [schutzen.utils :refer [log]])
   (:require-macros [schutzen.event
                     :refer [on-keydown on-keyup on-timeout]]))

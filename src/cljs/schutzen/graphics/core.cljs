@@ -9,10 +9,14 @@
 ;; Sprite class represents an graphics object that is drawn with a
 ;; width and height on the screen. Transforms can also be applied to
 ;; the sprite to further change aspects of what is being seen.
-(defrecord Sprite [img width height transforms]
+(defrecord Sprite [img width height origin transforms]
   IDrawable
   (draw [_ canvas x-pos y-pos]
-    (c2d/draw-image canvas img x-pos y-pos width height)))
+    (let [[x-origin y-origin] origin]
+      (c2d/draw-image canvas img 
+                      (- x-pos x-origin) (- y-pos y-origin) 
+                      width height)
+      )))
 
 (defn create-sprite 
   "Create a sprite object
@@ -29,9 +33,10 @@
   transforms -- a map containing transformations
 
   "
-  [img width height]
+  [img width height & {:keys [origin] :or {origin [0 0]}}]
   (map->Sprite {:img img
                 :width width
                 :height height
+                :origin origin
                 :transforms {}}))
 
