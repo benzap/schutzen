@@ -14,7 +14,8 @@
             [schutzen.physics.engine]
             [schutzen.globals :refer [*schutzen-active*]]
             [schutzen.game.core :as game]
-            [schutzen.actors.ship]))
+            [schutzen.actors.ship]
+            [schutzen.actors.mutant]))
 
 (declare -init)
 
@@ -77,8 +78,11 @@
             ;;
             (log "Initializing Actor Assets...")
             (schutzen.actors.ship/init-sprites)
+            (schutzen.actors.mutant/init-sprites)
 
+            ;;
             ;; Initializing the scenes
+            ;;
             (-init root-dom opts containers)))))))
 
 (defn -init [root-dom opts containers]

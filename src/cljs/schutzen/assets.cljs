@@ -18,6 +18,7 @@
     :bomb {:url "bomb.png"}
     :ship {:url "ship.png"}
     :placeholder {:url "placeholder.png"}
+    :mutant {:url "mutant.png"}
     }))
 
 (defn download-image
