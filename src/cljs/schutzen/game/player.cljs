@@ -2,7 +2,8 @@
   (:require [schutzen.utils :refer [log]]
             [schutzen.event :as event]
             [schutzen.array2 :refer [a++ ax+ ay+]]
-            [schutzen.actors.ship :as ship])
+            [schutzen.actors.ship :as ship]
+            [schutzen.state :as state])
   (:require-macros [schutzen.event
                     :refer [on-keydown on-keyup on-timeout]]))
 
@@ -63,3 +64,24 @@
  (when-let [ship-actor @player-actor]
    (ship/thrust-stop ship-actor)
    ))
+
+;; Viewport Testing
+(on-keydown 
+ :left
+ (log "Move viewport left")
+ (swap! state/game update-in [:viewport :left] + 320)
+ )
+
+(on-keydown
+ :right
+ (log "Move viewport right")
+ (swap! state/game update-in [:viewport :left] - 320)
+ )
+
+(on-keyup
+ :left
+ (log "Stop moving viewport"))
+
+(on-keyup
+ :right
+ (log "Stop moving viewport"))

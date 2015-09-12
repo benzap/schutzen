@@ -6,9 +6,13 @@
 
 (defn correct-screen-offset-x
   "The virtual screen that we see is placed at a 3 segment offset. We
-  correct certain interactive IDrawable objects for this"
+  correct certain interactive IDrawable objects for this, and apply
+  the viewport offset"
   [drawable-x-position]
-  (- drawable-x-position (* 3 state/screen-width)))
+  (let [viewport-offset (-> @state/game :viewport :left)]
+    (-> drawable-x-position
+        (- (* 3 state/screen-width))
+        (- viewport-offset))))
 
 (defprotocol IDrawable
   (draw [this canvas x-pos y-pos]))
