@@ -4,6 +4,7 @@
             [schutzen.actors.actor :as actor]
             [schutzen.assets :as assets]
             [schutzen.graphics.core :as graphics]
+            [schutzen.collision.core :as collision]
             [schutzen.array2 :refer [ay= ax=]]
             [schutzen.physics.damping :as damping]))
 
@@ -33,6 +34,8 @@
   []
   (let [ship-actor (actor/create "ship" :player)]
     (reset! (-> ship-actor :graphics) @sprite-ship-right)
+    (reset! (-> ship-actor :collision) 
+            (collision/create-bounding-box [48 16] :origin [24 8]))
     (damping/add-damping! ship-actor 
                           ship-horizontal-damping 
                           :x-axis-only true)

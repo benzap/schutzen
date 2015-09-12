@@ -4,11 +4,13 @@
             [schutzen.actors.actor :as actor]
             [schutzen.assets :as assets]
             [schutzen.graphics.core :as graphics]
+            [schutzen.collision.core :as collision]
             [schutzen.array2 :refer [ay= ax=]]
             [schutzen.physics.damping :as damping]))
 
 (def sprite-mutant-right (atom nil))
 
+;; Graphics Initialization
 (defn init-sprites []
   (reset! sprite-mutant-right 
           (graphics/create-sprite (assets/get-image :mutant)
@@ -20,5 +22,7 @@
   []
   (let [mutant-actor (actor/create "mutant" :enemy)]
     (reset! (-> mutant-actor :graphics) @sprite-mutant-right)
+    (reset! (-> mutant-actor :collision) 
+            (collision/create-bounding-box [16 16] :origin [8 8]))
     mutant-actor))
 
