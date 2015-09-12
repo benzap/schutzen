@@ -2,8 +2,40 @@
   "This grabs all of the actors within the game state, and draws them
   onto the screen."
   (:require [schutzen.utils :refer [log]]
-            [schutzen.array2 :refer [ax ay]]
-            [schutzen.graphics.core :as graphics]))
+            [schutzen.array2 :refer [ax ay ax=]]
+            [schutzen.graphics.core :as graphics]
+            [schutzen.state :as state]))
+
+(defn correct-actor-position
+  "this fixes the position of the actor to be placed correctly within
+  the viewport. This will only affect the x-position. This makes it so
+  that actors that fall off the viewport will wrap around, and
+  re-display on the other side of the viewport.
+  
+  This is based on the equation:
+  xp' = [(xp-xv) mod 7w] + xv
+  where:
+    xp' - the new actor position
+    xp  - previous actor position
+    xv  - the current viewport offset
+    w   - the screen width
+
+  Notes:
+
+  - this works by translating the position of the actor to a zero'd
+  position, so that the modulo can correctly offset the position. The
+  position is then translated back into the previous position that is
+  a representation with respect to the current viewport offset.
+
+  "
+  [actor]
+  (let [position (-> actor :physics :position)
+        xp (ax position)
+        xv (-> @state/game :viewport :left)
+        w state/screen-width
+        ]
+    (ax= position (+ (mod (- xp xv) (* 7 w)) xv))
+    ))
 
 (defn draw-actor
   "Takes an Actor, and draws it onto the given canvas"
@@ -19,4 +51,5 @@
   draws them onto the screen."
   [canvas actors]
   (doseq [actor actors]
+    (correct-actor-position actor)
     (draw-actor canvas actor)))

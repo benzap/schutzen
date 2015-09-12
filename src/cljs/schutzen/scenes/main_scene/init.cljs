@@ -23,7 +23,4 @@
     (log "Pausing Main Scene")))
 
 (defn create-main-scene [dom]
-  (->MainScene (c2d/init dom 640 480)))
- 
-
-
+  (->MainScene (c2d/init dom state/screen-width state/screen-height)))

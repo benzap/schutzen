@@ -3,6 +3,16 @@
   for manipulating it."
   (:require [schutzen.utils :refer [log]]))
 
+;; Constants
+
+;; Dimensions of the screen
+;; |__|_|__|
+;; 0  3 4  7
+(def screen-width 640)
+(def screen-height 480)
+(def screen-offset (* screen-width 3))
+(def viewport-width (* screen-width 7))
+
 ;; Game State
 (defonce game
   (atom {}))

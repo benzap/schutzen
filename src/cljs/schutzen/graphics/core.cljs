@@ -1,7 +1,14 @@
 (ns schutzen.graphics.core
   (:require [schutzen.utils :refer [log]]
             [schutzen.assets :as assets]
-            [schutzen.canvas.two.core :as c2d]))
+            [schutzen.canvas.two.core :as c2d]
+            [schutzen.state :as state]))
+
+(defn correct-screen-offset-x
+  "The virtual screen that we see is placed at a 3 segment offset. We
+  correct certain interactive IDrawable objects for this"
+  [drawable-x-position]
+  (- drawable-x-position (* 3 state/screen-width)))
 
 (defprotocol IDrawable
   (draw [this canvas x-pos y-pos]))
@@ -14,7 +21,8 @@
   (draw [_ canvas x-pos y-pos]
     (let [[x-origin y-origin] origin]
       (c2d/draw-image canvas img 
-                      (- x-pos x-origin) (- y-pos y-origin) 
+                      (correct-screen-offset-x (- x-pos x-origin)) 
+                      (- y-pos y-origin)
                       width height)
       )))
 

@@ -51,7 +51,8 @@
 (defn ax= 
   "set x component of 2d array"
   [a x]
-  (aset a 0 x))
+  (aset a 0 x)
+  x)
 
 (defn ax+ 
   "add to array's x component"
@@ -76,7 +77,8 @@
 (defn ay=
   "set y component of 2d array"
   [a y]
-  (aset a 1 y))
+  (aset a 1 y)
+  y)
 
 (defn ay+
   "add to array's y component"
