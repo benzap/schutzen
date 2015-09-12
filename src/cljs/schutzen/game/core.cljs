@@ -10,7 +10,7 @@
 (defn start-game []
   (let [ship-actor (ship/create)]
     (a== (-> ship-actor :physics :position) 
-         (aa 2240 240))
+         (aa 2240 120))
     (a== (-> ship-actor :physics :velocity)
          (aa 0 0))
     (a== (-> ship-actor :physics :acceleration)

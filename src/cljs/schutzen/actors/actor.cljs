@@ -45,5 +45,5 @@
       :type type
       :physics (physics/create :mass mass)
       :graphics (atom nil)
-      :collision nil
+      :collision (atom nil)
       :custom (atom {})})))

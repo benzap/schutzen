@@ -66,22 +66,15 @@
    ))
 
 ;; Viewport Testing
-(on-keydown 
- :left
- (log "Move viewport left")
- (swap! state/game update-in [:viewport :left] + 320)
- )
 
-(on-keydown
- :right
- (log "Move viewport right")
- (swap! state/game update-in [:viewport :left] - 320)
- )
+(comment
+  (on-keydown 
+   :left
+   (swap! state/game update-in [:viewport :left] + 320)
+   )
 
-(on-keyup
- :left
- (log "Stop moving viewport"))
-
-(on-keyup
- :right
- (log "Stop moving viewport"))
+  (on-keydown
+   :right
+   (swap! state/game update-in [:viewport :left] - 320)
+   )
+)
