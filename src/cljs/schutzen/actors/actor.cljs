@@ -25,7 +25,7 @@
      physics
      graphics
      collision
-     custom])
+     state])
 
 (defn create 
   "Create actor with a set of defaults provided
@@ -46,4 +46,4 @@
       :physics (physics/create :mass mass)
       :graphics (atom nil)
       :collision (atom nil)
-      :custom (atom {})})))
+      :state (atom {})})))

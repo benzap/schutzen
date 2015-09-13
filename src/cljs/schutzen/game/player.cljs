@@ -56,7 +56,7 @@
 (on-keydown
  (:thrust player-controls)
  (when-let [ship-actor @player-actor]
-   (ship/thrust-left ship-actor)
+   (ship/thrust ship-actor)
    ))
 
 (on-keyup
@@ -64,6 +64,14 @@
  (when-let [ship-actor @player-actor]
    (ship/thrust-stop ship-actor)
    ))
+
+(on-keydown
+ (:switch-directions player-controls)
+ (when-let [ship-actor @player-actor]
+   (ship/toggle-ship-direction ship-actor)
+   ))
+
+;; Ship-Direction
 
 ;; Viewport Testing
 

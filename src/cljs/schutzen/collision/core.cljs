@@ -24,7 +24,7 @@
   - This should be supplied to an Actor object in the :collision atom
 
   "
-  [dimensions & {:keys[origin] :or {origin [0 0]}}]
+  [dimensions & {:keys [origin] :or {origin [0 0]}}]
   (map->CollisionBoundingBox 
    {:collision-type :bounding-box
     :dimensions dimensions
@@ -56,8 +56,8 @@
         second-collision (-> second-actor :collision deref)
         second-position (-> second-actor :physics :position)
         ;; second position with the collision offset
-        x2 (- (ax second-position) (-> second-collision :origin first (or 0)))
-        y2 (- (ay second-position) (-> second-collision :origin second (or 0)))
+        x2 (- (ax second-position) (-> second-collision :origin first))
+        y2 (- (ay second-position) (-> second-collision :origin second))
         ;; second dimensions
         w2 (-> second-collision :dimensions first)
         h2 (-> second-collision :dimensions second)

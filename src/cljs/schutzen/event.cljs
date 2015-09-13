@@ -1,7 +1,19 @@
 (ns schutzen.event
   "Contains wrappers around the window for keyboard events. Provides a
   simpler system for tracking when the key and pressed and
-  depressed. Could be expanded on to track key combinations."
+  depressed. Could be expanded on to track key combinations.
+  
+  Examples:
+
+  (on-keydown 
+   :space
+   (log \"Hello dry skin build up!\"))
+
+  (on-keyup
+   :space
+   (log \"Goodbye spacebar!\"))
+
+  "
   (:require [schutzen.utils :refer [log]])
   (:require-macros [schutzen.event
                     :refer [on-keydown on-keyup on-timeout]]))
@@ -91,6 +103,3 @@
     ))
 
 ;;(on-timeout 3 (log "ding!"))
-
-(on-keydown :space (log "Pressed Spacebar Down"))
-(on-keyup :space (log "Depressed Spacebar Up"))

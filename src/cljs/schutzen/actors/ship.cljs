@@ -12,19 +12,24 @@
 (def ship-elevation-thrust-speed 500.0)
 
 ;; How fast the ship accelerates
-(def ship-horizontal-thrust-acceleration 70.0)
+(def ship-horizontal-thrust-acceleration 1700.0)
 
 ;; How fast the ship decelerates
-(def ship-horizontal-damping 0.99)
+(def ship-horizontal-damping 0.97)
 
 ;; Sprites
 (def sprite-ship-right (atom nil))
+(def sprite-ship-left (atom nil))
 
 ;; Asset Initialization. We need to generate the sprites after assets
 ;; have loaded in the core of the game.
 (defn init-sprites []
   (reset! sprite-ship-right
-          (graphics/create-sprite (assets/get-image :ship) 
+          (graphics/create-sprite (assets/get-image :ship-right)
+                                  48 16
+                                  :origin [24 8]))
+  (reset! sprite-ship-left
+          (graphics/create-sprite (assets/get-image :ship-left)
                                   48 16
                                   :origin [24 8]))
   )
@@ -39,7 +44,10 @@
     (damping/add-damping! ship-actor 
                           ship-horizontal-damping 
                           :x-axis-only true)
-    (log "Ship" ship-actor)
+    (reset! 
+     (-> ship-actor :state) 
+     {:ship-direction :right
+      })
     ship-actor))
 
 (defn move-up [actor]
@@ -58,15 +66,37 @@
 
 (defn thrust-left [actor]
   (let [acceleration (-> actor :physics :acceleration)]
-    (ax= acceleration ship-horizontal-thrust-acceleration)
+    (ax= acceleration (- ship-horizontal-thrust-acceleration))
     ))
 
 (defn thrust-right [actor]
   (let [acceleration (-> actor :physics :acceleration)]
-    (ax= acceleration (- ship-horizontal-thrust-acceleration))
+    (ax= acceleration ship-horizontal-thrust-acceleration)
     ))
+
+(defn thrust [actor]
+  (if (= (-> actor :state deref :ship-direction) :right)
+    (thrust-right actor)
+    (thrust-left actor)))
 
 (defn thrust-stop [actor]
   (let [acceleration (-> actor :physics :acceleration)]
     (ax= acceleration 0.0)
     ))
+
+(defn toggle-ship-direction [actor]
+  (let [ship-direction
+        (-> actor :state deref :ship-direction)]
+    (log "Ship Direction" ship-direction)
+    (if (= ship-direction :right)
+      (do
+        (reset! (-> actor :graphics) @sprite-ship-left)
+        (swap! (-> actor :state) 
+               assoc :ship-direction :left)
+        )
+      (do
+        (reset! (-> actor :graphics) @sprite-ship-right)
+        (swap! (-> actor :state) 
+               assoc :ship-direction :right)
+        )
+      )))

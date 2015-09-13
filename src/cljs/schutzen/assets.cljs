@@ -17,6 +17,8 @@
    {:dot {:url "dot.png"}
     :bomb {:url "bomb.png"}
     :ship {:url "ship.png"}
+    :ship-right {:url "ship-right.png"}
+    :ship-left {:url "ship-left.png"}
     :placeholder {:url "placeholder.png"}
     :mutant {:url "mutant.png"}
     }))
