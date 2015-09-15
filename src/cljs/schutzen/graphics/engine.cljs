@@ -4,7 +4,8 @@
   (:require [schutzen.utils :refer [log]]
             [schutzen.array2 :refer [ax ay ax=]]
             [schutzen.graphics.core :as graphics]
-            [schutzen.state :as state]))
+            [schutzen.state :as state]
+            [schutzen.canvas.two.core :as c2d]))
 
 (defn correct-actor-position
   "this fixes the position of the actor to be placed correctly within
@@ -52,4 +53,5 @@
   [canvas actors]
   (doseq [actor actors]
     (correct-actor-position actor)
-    (draw-actor canvas actor)))
+    (draw-actor canvas actor)
+    ))

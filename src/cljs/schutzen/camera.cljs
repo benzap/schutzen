@@ -15,7 +15,9 @@
       (+ (* state/screen-width (/ 1 4)))
       ))
 
-(def camera-speed 600.0)
+(def camera-speed 400.0)
+
+(def cond-camera-attenuation 2.5)
 
 (defn run-camera-hook 
   "Follows the player ship, and corrects the camera"
@@ -34,8 +36,8 @@
           camera-delta (* camera-speed delta-sec)
           camera-delta (if (>= target-delta 0) camera-delta (- camera-delta))]
       (cond
-        (or (and (>= camera-delta (/ target-delta 2)) (>= target-delta 0))
-            (and (< camera-delta (/ target-delta 2)) (< target-delta 0)))
+        (or (and (>= camera-delta (/ target-delta cond-camera-attenuation)) (>= target-delta 0))
+            (and (< camera-delta (/ target-delta cond-camera-attenuation)) (< target-delta 0)))
         (swap! state/game update-in [:viewport :left] - target-delta)
 
         :else

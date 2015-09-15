@@ -49,3 +49,49 @@
     (aset "font" (str size "px " family)))
 
   (.fillText context text x y))
+
+(defn draw-path
+  "Draw a set of lines from the given list of [x, y] coordinates onto the screen
+  
+  Keyword Arguments:
+  
+  context -- canvas context to draw the path onto
+
+  path-listing -- a vector or list containing x and y coordinates 
+                  [[x y], ...]
+
+  Optional Arguments:
+
+  color -- color of the stroke used on the path
+
+  width -- width of the stroke used on the path
+
+  line-cap -- type of line cap to use ['butt' 'round' or 'square']
+
+  line-join -- type of line join to use ['miter' 'round' or 'bevel']
+
+  "
+  [context path-listing & 
+   {:keys [color width line-cap line-join]
+    :or {color "#FFFFFF" 
+         width 5 
+         line-cap "round"
+         line-join "round"}}]
+
+  ;;move to the first position
+  (let [[x y] (first path-listing)]
+    (.beginPath context)
+    (.moveTo context x y))
+  
+  ;;make a path of lines from the position moved to
+  (doseq [[x y] (rest path-listing)]
+    (.lineTo context x y)
+    )
+
+  (aset context "lineWidth" width)
+  (aset context "strokeStyle" color)  
+  (aset context "lineCap" line-cap)
+  (aset context "lineJoin" line-join)
+  
+  (.stroke context)
+  )

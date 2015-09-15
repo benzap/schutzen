@@ -2,7 +2,8 @@
   (:require [schutzen.utils :refer [log]]
             [schutzen.assets :as assets]
             [schutzen.canvas.two.core :as c2d]
-            [schutzen.state :as state]))
+            [schutzen.state :as state]
+            [schutzen.graphics.landscape]))
 
 (defn correct-screen-offset-x
   "The virtual screen that we see is placed at a 3 segment offset. We
@@ -18,8 +19,7 @@
   (draw [this canvas x-pos y-pos]))
 
 ;; Sprite class represents an graphics object that is drawn with a
-;; width and height on the screen. Transforms can also be applied to
-;; the sprite to further change aspects of what is being seen.
+;; width and height on the screen.
 (defrecord Sprite [img width height origin transforms]
   IDrawable
   (draw [_ canvas x-pos y-pos]
@@ -52,3 +52,38 @@
                 :origin origin
                 :transforms {}}))
 
+;;
+;; Landscape
+;;
+
+;; A segment of space consisting of a path, which
+;; represents landscape on the surface of the planet.
+(defrecord LandscapeSegment [path-listing color width]
+  IDrawable
+  (draw [_ canvas x-pos y-pos]
+    (let [x-pos (correct-screen-offset-x x-pos)]
+
+    
+      ;; correct the positioning on the path listing by applying the
+      ;; x-position to the x-coordinate of each point on the path
+      (let [path-listing (map (fn [[x y] p] [(+ x x-pos) y]) path-listing)]
+        (c2d/draw-path canvas path-listing :color color :width width)
+        ))))
+
+(defn create-landscape-segment
+  "Create a landscape segment
+
+  Keyword Arguments:
+
+  path-listing -- list or vector representing the segment
+
+  "
+  [path-listing & 
+   {:keys [color width]
+    :or {color "#FFFFFF"
+         width 5}}]
+  (map->LandscapeSegment
+   {:path-listing path-listing
+    :color color
+    :width width}
+   ))

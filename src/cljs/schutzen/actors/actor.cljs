@@ -37,13 +37,13 @@
   type -- a keyword corresponding to the type of the actor ex. :enemy
 
   init-img -- refers to the initial image representing this actor"
-  [name type & {:keys [mass] :or {mass 1.0}}]
+  [name type & {:keys [position mass] :or {position [0 0] mass 1.0}}]
   (let [id (swap! id-count inc)]
     (map->Actor
      {:name name
       :id id
       :type type
-      :physics (physics/create :mass mass)
+      :physics (physics/create :position position :mass mass)
       :graphics (atom nil)
       :collision (atom nil)
       :state (atom {})})))

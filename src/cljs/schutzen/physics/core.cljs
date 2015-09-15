@@ -13,9 +13,9 @@
 
 (defn create 
   "Actor physics component"
-  [& {:keys [mass] :or {mass 1.0}}]
+  [& {:keys [position mass] :or {position [0 0] mass 1.0}}]
   (map->Physics 
-   {:position (aa 0 0)
+   {:position (aa (first position) (second position))
     :velocity (aa 0 0)
     :acceleration (aa 0 0)
 
