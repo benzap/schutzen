@@ -133,5 +133,3 @@
               first
               (assoc-in [:path-listing 0 1] y-last)))
 ))
-
-(log "Landscape" (generate-landscape-listing))

@@ -19,7 +19,6 @@
         (aset "canvas" "width" cwidth)
         (aset "canvas" "height" cheight)
         (aset "imageSmoothingEnabled" false))
-      (log "Context" context)
       (.moveTo context 150 0)
       context)))
 
