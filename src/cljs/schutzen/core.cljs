@@ -34,7 +34,7 @@
       (scene/render-scene scene state/game (/ 1 60)))
     (event/run-timer-system (/ 1 60))
     (schutzen.physics.engine/run-engine (-> @state/game :actors) (/ 1 60))
-    ;;(schutzen.collision.engine/run-engine (-> @state/game :actors) (/ 1 60))
+    (schutzen.collision.engine/run-engine (-> @state/game :actors) (/ 1 60))
     (schutzen.camera/run-camera-hook (/ 1 60))))
 
 (defn ^:export run []

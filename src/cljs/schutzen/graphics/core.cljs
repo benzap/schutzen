@@ -25,7 +25,7 @@
   (draw [_ canvas x-pos y-pos]
     (let [[x-origin y-origin] origin]
       (c2d/draw-image canvas img 
-                      (correct-screen-offset-x (- x-pos x-origin)) 
+                      (- (correct-screen-offset-x x-pos) x-origin)
                       (- y-pos y-origin)
                       width height)
       )))

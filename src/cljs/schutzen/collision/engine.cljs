@@ -12,14 +12,43 @@
 
 (defn process-off-collision [first-actor second-actor])
 
+(defn is-landscape-actor? [actor]
+  (let [actor-type (-> first-actor :name)]
+    (not= actor-type "landscape")))
+
+(defn has-collision-component? [actor]
+  (not= (-> actor :collision deref) nil))
+
+(defn should-check-collision? 
+  "Filters out actors that we shouldn't check collisions against"
+  [first-actor second-actor]
+  (and
+   (not= first-actor second-actor)
+   ;;(not (is-landscape-actor? first-actor))
+   ;;(has-collision-component? first-actor)
+   ;;(has-collision-component? second-actor)
+   ))
+
 (defn run-engine [actors delta-sec]
-  (let [collision-pairs
-        (for [first-actor actors
-              second-actor actors
-              :when (not= first-actor second-actor)]
-          [first-actor second-actor])]
-    (doseq [[first-actor second-actor] collision-pairs]
-      (if (actors-collided? first-actor second-actor)
-        (process-on-collision first-actor second-actor)
-        (process-off-collision first-actor second-actor)
-        ))))
+  (let [num-actors (dec (count actors))]
+    (loop [ai1 0
+           ai2 0]
+      (let [first-actor (actors ai1)
+            second-actor (actors ai2)]
+
+        ;; Check Collision
+        (when (should-check-collision? first-actor second-actor)
+          (if (actors-collided? first-actor second-actor)
+            (process-on-collision first-actor second-actor)))
+        
+        ;; Loop
+        (cond
+          (and (< ai1 num-actors)
+               (>= ai2 num-actors))
+          (recur (inc ai1) 0)
+          
+          (and (<= ai1 num-actors)
+               (< ai2 num-actors))
+          (recur ai1 (inc ai2))
+
+          )))))

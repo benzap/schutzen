@@ -63,14 +63,10 @@
         h2 (-> second-collision :dimensions second)
 
         ;;calc temps
-        xt (- x1 x2)
-        yt (- y1 y2)
+        xt (* (Math.abs (- x1 x2)) 2)
+        yt (* (Math.abs (- y1 y2)) 2)
+        wt (+ w1 w2)
+        ht (+ h1 h2)
         ]
-    (cond
-      ;; x not bounded?
-      (or (> xt w1) (> (- xt) w2)) false
-      ;; y not bounded?
-      (or (> yt h1) (> (- yt) h2)) false
-      ;; both are bounded
-      :else true
-      )))
+    (and (<= xt wt)
+         (<= yt ht))))
