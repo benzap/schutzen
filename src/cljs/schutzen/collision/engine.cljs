@@ -12,9 +12,9 @@
 
 (defn process-off-collision [first-actor second-actor])
 
-(defn is-landscape-actor? [actor]
+(defn is-landscape-actor? [first-actor]
   (let [actor-type (-> first-actor :name)]
-    (not= actor-type "landscape")))
+    (= actor-type "landscape")))
 
 (defn has-collision-component? [actor]
   (not= (-> actor :collision deref) nil))
@@ -24,7 +24,7 @@
   [first-actor second-actor]
   (and
    (not= first-actor second-actor)
-   ;;(not (is-landscape-actor? first-actor))
+   (not (is-landscape-actor? first-actor))
    ;;(has-collision-component? first-actor)
    ;;(has-collision-component? second-actor)
    ))
