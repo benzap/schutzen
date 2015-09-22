@@ -26,8 +26,8 @@
   (and
    (not= first-actor second-actor)
    (not (is-landscape-actor? first-actor))
-   ;;(has-collision-component? first-actor)
-   ;;(has-collision-component? second-actor)
+   (has-collision-component? first-actor)
+   (has-collision-component? second-actor)
    ))
 
 (defn process-collisions [actors delta-sec]
