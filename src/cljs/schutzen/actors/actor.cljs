@@ -16,6 +16,14 @@
 ;; when one is assigned.
 (defonce id-count (atom 0))
 
+;; Used to find the bounds of an actor within the world. This is useful for simple
+;; collision detection in spatial partitioning.
+(defprotocol IWorldBounded
+  (get-world-top-bound [this])
+  (get-world-right-bound [this])
+  (get-world-bottom-bound [this])
+  (get-world-left-bound [this]))
+
 ;; Most basic representation for an object being displayed on the
 ;; screen.
 (defrecord Actor 
@@ -25,7 +33,8 @@
      physics
      graphics
      collision
-     state])
+     state]
+  )
 
 (defn create 
   "Create actor with a set of defaults provided

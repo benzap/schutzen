@@ -18,6 +18,14 @@
 (defprotocol IDrawable
   (draw [this canvas x-pos y-pos]))
 
+;; Find the bounds of a graphic with respect to a (0, 0) world
+;; position.
+(defprotocol IGraphicBounded
+  (get-top-bound [this])
+  (get-right-bound [this])
+  (get-bottom-bound [this])
+  (get-left-bound [this]))
+
 ;; Sprite class represents an graphics object that is drawn with a
 ;; width and height on the screen.
 (defrecord Sprite [img width height origin transforms]
@@ -28,7 +36,32 @@
                       (- (correct-screen-offset-x x-pos) x-origin)
                       (- y-pos y-origin)
                       width height)
-      )))
+      ))
+
+  IGraphicBounded
+  (get-top-bound [this]
+    (-> this :origin 
+        (get 1) 
+        -
+        ))
+  (get-right-bound [this]
+    (-> this :origin 
+        (get 0)
+        - 
+        (+ (:width this))
+        ))
+  (get-left-bound [this]
+    (-> this :origin 
+        (get 0) 
+        -
+        ))
+  (get-bottom-bound [this]
+    (-> this :origin 
+        (get 1) 
+        -
+        (+ (:height this))
+        ))
+  )
 
 (defn create-sprite 
   "Create a sprite object
