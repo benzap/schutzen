@@ -6,7 +6,7 @@
             [schutzen.array2 :refer [ax]]
             [schutzen.actors.actor]))
 
-(def partition-segments 4)
+(def partition-segments 8)
 (def partition-segment-width (/ state/viewport-width partition-segments))
 
 (defn value-bounded-to?

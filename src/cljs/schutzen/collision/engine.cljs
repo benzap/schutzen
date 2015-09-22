@@ -31,28 +31,28 @@
    ))
 
 (defn process-collisions [actors delta-sec]
-  (let [num-actors (dec (count actors))]
-    (loop [ai1 0
-           ai2 0]
-      (let [first-actor (actors ai1)
-            second-actor (actors ai2)]
+  (when-not (empty? actors)
+    (let [num-actors (dec (count actors))]
+      (loop [ai1 0
+             ai2 0]
+        (let [first-actor (actors ai1)
+              second-actor (actors ai2)]
 
-        ;; Check Collision
-        (when (should-check-collision? first-actor second-actor)
-          (if (actors-collided? first-actor second-actor)
-            (process-on-collision first-actor second-actor)))
-        
-        ;; Loop
-        (cond
-          (and (< ai1 num-actors)
-               (>= ai2 num-actors))
-          (recur (inc ai1) 0)
+          ;; Check Collision
+          (when (should-check-collision? first-actor second-actor)
+            (if (actors-collided? first-actor second-actor)
+              (process-on-collision first-actor second-actor)))
           
-          (and (<= ai1 num-actors)
-               (< ai2 num-actors))
-          (recur ai1 (inc ai2))
-
-          )))))
+          ;; Loop
+          (cond
+            (and (< ai1 num-actors)
+                 (>= ai2 num-actors))
+            (recur (inc ai1) 0)
+            
+            (and (<= ai1 num-actors)
+                 (< ai2 num-actors))
+            (recur ai1 (inc ai2))
+          ))))))
 
 (defn run-engine [actors delta-sec]
   (doseq [actor-partition (partitioning/spatial-partition-x actors)]
