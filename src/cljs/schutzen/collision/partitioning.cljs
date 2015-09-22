@@ -1,9 +1,12 @@
 (ns schutzen.collision.partitioning
+  "Used to perform spatial partitioning of the actors on the screen to
+  improve performance"
   (:require [schutzen.utils :refer [log]]
             [schutzen.state :as state]
-            [schutzen.array2 :refer [ax]]))
+            [schutzen.array2 :refer [ax]]
+            [schutzen.actors.actor]))
 
-(def partition-segments 16)
+(def partition-segments 4)
 (def partition-segment-width (/ state/viewport-width partition-segments))
 
 (defn value-bounded-to?
@@ -34,16 +37,19 @@
     )))
 
 (defn actor-in-bounds? [actor segment-index]
-  (let [
-        x-pos (-> actor :physics :position ax)
-        width (-> actor :collision :dimensions)
-        ]))
+  (let [x-pos (schutzen.actors.actor/get-world-left-bound actor)
+        width 
+        (-
+         (schutzen.actors.actor/get-world-right-bound actor)
+         (schutzen.actors.actor/get-world-left-bound actor))]
+    (box-in-bounds-of-segment? x-pos width segment-index)
+    ))
 
 (defn spatial-partition-x [actors]
-  (for [segment-index 0
-        partition-list (transient [])]
+  (loop [segment-index 0
+         partition-list (transient [])]
     (if (< segment-index partition-segments)
       (recur (inc segment-index)
-             (conj! (filter %() partition-list))
-             (persistent! partition-list))
+             (conj! partition-list (filterv #(actor-in-bounds? % segment-index) actors)))
+      (persistent! partition-list)
       )))

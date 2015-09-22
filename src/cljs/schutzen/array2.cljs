@@ -31,6 +31,8 @@
   (a== array1 (a 0 0)) ; (aa 0 0)
 ")
 
+(declare ax ay)
+
 (defn aa 
   "Create 2d array from provided x and y values"
   [& [x y]]

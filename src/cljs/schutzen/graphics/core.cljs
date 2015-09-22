@@ -101,7 +101,14 @@
       ;; x-position to the x-coordinate of each point on the path
       (let [path-listing (map (fn [[x y] p] [(+ x x-pos) y]) path-listing)]
         (c2d/draw-path canvas path-listing :color color :width width)
-        ))))
+        )))
+  IGraphicBounded
+  (get-top-bound [this] 0)
+  (get-right-bound [this]
+    schutzen.graphics.landscape/landscape-segment-width)
+  (get-left-bound [this] 0)
+  (get-bottom-bound [this] 0)
+)
 
 (defn create-landscape-segment
   "Create a landscape segment

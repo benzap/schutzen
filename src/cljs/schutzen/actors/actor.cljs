@@ -10,7 +10,8 @@
   "
   (:require [schutzen.utils :refer [log]]
             [schutzen.physics.core :as physics]
-            [schutzen.graphics.core :as graphics]))
+            [schutzen.graphics.core :as graphics]
+            [schutzen.array2 :refer [ax ay]]))
 
 ;; Defines the a unique id for each actor on the screen. Increments
 ;; when one is assigned.
@@ -34,6 +35,30 @@
      graphics
      collision
      state]
+  IWorldBounded
+  (get-world-top-bound [this]
+    (+
+     (-> this :physics :position ay)
+     (graphics/get-top-bound (-> this :graphics deref))
+     ))
+  
+  (get-world-right-bound [this]
+    (+
+     (-> this :physics :position ax)
+     (graphics/get-right-bound (-> this :graphics deref))
+     ))
+
+  (get-world-bottom-bound [this]
+    (+
+     (-> this :physics :position ay)
+     (graphics/get-bottom-bound (-> this :graphics deref))
+     ))
+  
+  (get-world-left-bound [this]
+    (+
+     (-> this :physics :position ax)
+     (graphics/get-left-bound (-> this :graphics deref))
+     ))
   )
 
 (defn create 

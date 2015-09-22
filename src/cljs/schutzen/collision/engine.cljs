@@ -2,7 +2,8 @@
   "The collision engine, which compares actors to throw collision
   events"
   (:require [schutzen.utils :refer [log]]
-            [schutzen.collision.core]))
+            [schutzen.collision.core]
+            [schutzen.collision.partitioning :as partitioning]))
 
 (defn actors-collided? [first-actor second-actor]
   (schutzen.collision.core/is-collision? first-actor second-actor))
@@ -29,7 +30,7 @@
    ;;(has-collision-component? second-actor)
    ))
 
-(defn run-engine [actors delta-sec]
+(defn process-collisions [actors delta-sec]
   (let [num-actors (dec (count actors))]
     (loop [ai1 0
            ai2 0]
@@ -52,3 +53,8 @@
           (recur ai1 (inc ai2))
 
           )))))
+
+(defn run-engine [actors delta-sec]
+  (doseq [actor-partition (partitioning/spatial-partition-x actors)]
+    (process-collisions actor-partition delta-sec))
+  )
