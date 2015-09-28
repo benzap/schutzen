@@ -5,7 +5,8 @@
             [schutzen.array2 :refer [ax ay ax=]]
             [schutzen.graphics.core :as graphics]
             [schutzen.state :as state]
-            [schutzen.canvas.two.core :as c2d]))
+            [schutzen.canvas.two.core :as c2d]
+            [schutzen.graphics.utils]))
 
 (defn correct-actor-position
   "this fixes the position of the actor to be placed correctly within
@@ -32,10 +33,8 @@
   [actor]
   (let [position (-> actor :physics :position)
         xp (ax position)
-        xv (-> @state/game :viewport :left)
-        w state/screen-width
         ]
-    (ax= position (+ (mod (- xp xv) (* 7 w)) xv))
+    (ax= position (schutzen.graphics.utils/correct-viewport-position xp))
     ))
 
 (defn draw-actor

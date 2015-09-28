@@ -94,3 +94,12 @@
   
   (.stroke context)
   )
+
+(defn draw-point
+  "Draws a point on the screen. Current implementation draws small squares"
+  [context x y &
+   {:keys [color width]
+    :or {color "#FFFFFF"
+         width 1}}]
+  (aset context "fillStyle" color)
+  (.fillRect context (/ x 2) (/ y 2) width width))

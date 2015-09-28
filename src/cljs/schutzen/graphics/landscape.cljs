@@ -4,7 +4,7 @@
             [schutzen.random :as random]
             [schutzen.state :as state]))
 
-(def landscape-segments 64)
+(def landscape-segments 32)
 
 (def landscape-segment-width (/ state/viewport-width landscape-segments))
 

@@ -7,7 +7,8 @@
             [schutzen.state :as state]
             [schutzen.array2 :refer [aa a==]]
             [schutzen.physics.damping :as damping]
-            [schutzen.game.landscape]))
+            [schutzen.game.landscape]
+            [schutzen.graphics.stars]))
 
 (defn start-game []
   ;;Generated landscape
