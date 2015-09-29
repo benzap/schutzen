@@ -13,8 +13,7 @@
 (defn get-corrected-actor-position [actor]
   (let [position (-> actor :physics :position)
         viewport-offset (-> @state/game :viewport :left)
-        x (- (ax position) 
-             viewport-offset)
+        x (- (ax position) viewport-offset)
         y (ay position)
         x-ratio (/ map-width state/viewport-width)
         y-ratio (/ (- map-height 15) state/screen-height)]
@@ -30,6 +29,30 @@
     (c2d/draw-point context x y :color color :width width)
     ))
 
+(defn draw-map-landscape
+  [context actor]
+  (let [landscape (-> actor :graphics deref)
+        path-listing (:path-listing landscape)
+        color (:color landscape)
+        [x _] (get-corrected-actor-position actor)
+        [x1 y1] (first path-listing)
+        [x2 y2] (last path-listing)
+        x-ratio (/ map-width state/viewport-width)
+        y-ratio (/ (- map-height 15) state/screen-height)
+        x-offset (* (- x2 x1) x-ratio 1)
+
+        x1 (/ x 2)
+        y1 (* y1 y-ratio)
+        x2 (+ x1 x-offset)
+        y2 (* y2 y-ratio)
+        ]
+    (c2d/draw-path 
+     context
+     [[x1 y1]
+      [x2 y2]
+      ] :color color :width 1)
+    ))
+
 (defmulti draw-actor-on-map 
   (fn [context actor] [(:name actor) (:type actor)]))
 
@@ -43,6 +66,11 @@
 (defmethod draw-actor-on-map ["ship" :player]
   [context actor]
   (draw-map-point context actor :color "#ff0000" :width 5))
+
+(defmethod draw-actor-on-map ["landscape" :prop]
+  [context actor]
+  (draw-map-landscape context actor)
+  )
 
 (defn draw-map-actors [context]
   (doseq [actor (-> @state/game :actors)]

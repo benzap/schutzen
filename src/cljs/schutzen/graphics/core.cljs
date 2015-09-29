@@ -94,14 +94,10 @@
 (defrecord LandscapeSegment [path-listing color width]
   IDrawable
   (draw [_ canvas x-pos y-pos]
-    (let [x-pos (correct-screen-offset-x x-pos)]
-
-    
-      ;; correct the positioning on the path listing by applying the
-      ;; x-position to the x-coordinate of each point on the path
-      (let [path-listing (map (fn [[x y] p] [(+ x x-pos) y]) path-listing)]
-        (c2d/draw-path canvas path-listing :color color :width width)
-        )))
+    (let [x-pos (correct-screen-offset-x x-pos)
+          path-listing (map (fn [[x y] p] [(+ x x-pos) y]) path-listing)]
+      (c2d/draw-path canvas path-listing :color color :width width)
+      ))
   IGraphicBounded
   (get-top-bound [this] 0)
   (get-right-bound [this]
