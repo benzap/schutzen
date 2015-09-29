@@ -8,10 +8,6 @@
             [schutzen.graphics.stars]
             ))
 
-;; Stars background
-(def generated-stars-1
-  (schutzen.graphics.stars/generate-spacelayer 2 30))
-
 (defrecord MainScene [context]
   SceneRender
   (init-scene [_ state]
@@ -22,7 +18,7 @@
 
   (render-scene [_ state delta-ms]
     (c2d/clear context)
-    (schutzen.graphics.stars/draw-spacelayer context generated-stars-1)
+    (schutzen.graphics.stars/draw-space context)
     (schutzen.graphics.engine/run-engine context (-> @state/game :actors))
     )
 

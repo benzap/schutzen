@@ -11,7 +11,10 @@
             [schutzen.graphics.stars]))
 
 (defn start-game []
-  ;;Generated landscape
+  ;; Generated Stars
+  (schutzen.graphics.stars/generate-space)
+
+  ;; Generated landscape
   (let [generated-landscape-actors
         (schutzen.game.landscape/generate-landscape-actors "#B67721" 2)]
     (doseq [landscape-actor generated-landscape-actors]

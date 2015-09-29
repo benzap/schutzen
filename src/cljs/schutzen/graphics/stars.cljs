@@ -56,8 +56,9 @@
       :or {color "#ffffff"
            width 3}}]
   (let [x-pos (random/pick-value-in-range left-bound right-bound)
-        y-pos (random/pick-value-in-range upper-bound lower-bound)]
-    (log "Generated Star" x-pos y-pos)
+        y-pos (random/pick-value-in-range 10 700)
+        ;;(random/pick-value-in-range upper-bound lower-bound)
+        ]
     (create-star x-pos y-pos :width width :color color)
     ))
 
@@ -94,3 +95,22 @@
       (draw-star canvas space-element layer-division)
       )))
 
+;; Determines the number of layers of stars to be generated for the
+;; scene
+(def space-layer-distrib
+  [[5 10]
+   [10 10]
+   [15 10]
+   [30 10]])
+
+(defn generate-space []
+  (let [spacelayers
+        (mapv (fn [[layer num]]
+                (generate-spacelayer layer num))
+              space-layer-distrib)]
+    (swap! state/game assoc :starlayers spacelayers)
+    ))
+
+(defn draw-space [context]
+  (doseq [spacelayer (-> @state/game :starlayers)]
+    (draw-spacelayer context spacelayer)))

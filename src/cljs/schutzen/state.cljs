@@ -32,6 +32,7 @@
     :level 0
     :actors []
     :viewport {:left 0}
+    :spacelayers (atom [])
     })
   (reset!
    app
