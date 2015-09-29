@@ -10,6 +10,7 @@
             [schutzen.scenes.scene :as scene]
             [schutzen.scenes.status :refer [create-status-scene]]
             [schutzen.scenes.main-scene.init :refer [create-main-scene]]
+            [schutzen.scenes.world-map :refer [create-world-map]]
             [schutzen.event :as event]
             [schutzen.camera]
             [schutzen.physics.engine]
@@ -97,7 +98,7 @@
              (create-status-scene (:top-left-container containers))
 
              ;; top-middle map scene
-             ;; ...
+             (create-world-map (:top-middle-container containers))
 
              ;; bottom game scene
              (create-main-scene (:inner-bottom-container containers))
