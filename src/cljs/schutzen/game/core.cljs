@@ -1,6 +1,8 @@
 (ns schutzen.game.core
   (:require [schutzen.utils :refer [log]]
             [schutzen.actors.ship :as ship]
+            [schutzen.actors.ship-projectile :as ship-projectile]
+            [schutzen.actors.projectile :as projectile]
             [schutzen.actors.mutant :as mutant]
             [schutzen.actors.landscape :as landscape]
             [schutzen.game.player :as player]
@@ -21,6 +23,7 @@
       (state/add-actor! landscape-actor)
       ))
 
+  ;; Test Player Ship
   (let [ship-actor (ship/create)]
     (a== (-> ship-actor :physics :position) 
          (aa 2240 120))
@@ -32,6 +35,27 @@
     (state/add-actor! ship-actor)
     (player/apply-ship-controls! ship-actor)
     )
+
+  ;; Test Player Projectile
+  (let [ship-projectile-actor (ship-projectile/create)]
+    (a== (-> ship-projectile-actor :physics :position) 
+         (aa 2240 117))
+    (a== (-> ship-projectile-actor :physics :velocity)
+         (aa 1500 0))    
+
+    (state/add-actor! ship-projectile-actor)
+    )
+
+  ;;Test Enemy Projectile
+  (let [projectile-actor (projectile/create)]
+    (a== (-> projectile-actor :physics :position) 
+         (aa 2240 200))
+    (a== (-> projectile-actor :physics :velocity)
+         (aa 300 0))    
+
+    (state/add-actor! projectile-actor)
+    )  
+
 
   (let [mutant-actor (mutant/create)]
     (a== (-> mutant-actor :physics :position)

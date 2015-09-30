@@ -123,3 +123,61 @@
     :color color
     :width width}
    ))
+
+(defrecord Rectangle [width height color origin]
+  IDrawable
+  (draw [_ canvas x-pos y-pos]
+    (let [[x-origin y-origin] origin]
+      (c2d/draw-rect canvas
+                     (- (correct-screen-offset-x x-pos) x-origin)
+                     (- y-pos y-origin)
+                     width height
+                     :color color)
+      ))
+  IGraphicBounded
+  (get-top-bound [this]
+    (-> this :origin 
+        (get 1) 
+        -
+        ))
+  (get-right-bound [this]
+    (-> this :origin 
+        (get 0)
+        - 
+        (+ (:width this))
+        ))
+  (get-left-bound [this]
+    (-> this :origin 
+        (get 0) 
+        -
+        ))
+  (get-bottom-bound [this]
+    (-> this :origin 
+        (get 1) 
+        -
+        (+ (:height this))
+        ))
+  )
+
+(defn create-rectangle
+  "Create a rectangle
+  
+  Keyword Arguments:
+
+  width -- the width of the sprite based on the provided Image
+
+  height -- the height of the sprite based on the provided Image
+
+  color -- color of the rectangle
+
+  "
+  [width height & 
+   {:keys [color origin] 
+    :or {color "#ffffff"
+         origin [0 0]}}]
+  (map->Rectangle 
+   {:width width
+    :height height
+    :origin origin
+    :color color
+    }))
