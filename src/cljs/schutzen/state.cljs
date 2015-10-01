@@ -61,3 +61,9 @@
 
 (defn ^:export add-actor! [actor]
   (transform-actors! conj actor))
+
+(defn remove-actor! [actor]
+  (swap! game assoc :actors 
+         (filterv #(not= actor %)
+                  (-> @game :actors))))
+

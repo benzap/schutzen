@@ -3,15 +3,19 @@
   events"
   (:require [schutzen.utils :refer [log]]
             [schutzen.collision.core]
-            [schutzen.collision.partitioning :as partitioning]))
+            [schutzen.collision.partitioning :as partitioning]
+            [schutzen.collision.event]))
 
 (defn actors-collided? [first-actor second-actor]
   (schutzen.collision.core/is-collision? first-actor second-actor))
 
 (defn process-on-collision [first-actor second-actor]
-  (log "Actors Collided" first-actor second-actor))
+  (schutzen.collision.event/on-collision first-actor second-actor)
+  )
 
-(defn process-off-collision [first-actor second-actor])
+(defn process-off-collision [first-actor second-actor]
+  (schutzen.collision.event/off-collision first-actor second-actor)
+  )
 
 (defn is-landscape-actor? [first-actor]
   (let [actor-type (-> first-actor :name)]

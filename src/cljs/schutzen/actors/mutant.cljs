@@ -6,7 +6,8 @@
             [schutzen.graphics.core :as graphics]
             [schutzen.collision.core :as collision]
             [schutzen.array2 :refer [ay= ax=]]
-            [schutzen.physics.damping :as damping]))
+            [schutzen.physics.damping :as damping]
+            [schutzen.collision.event]))
 
 (def sprite-mutant-right (atom nil))
 
@@ -26,3 +27,7 @@
             (collision/create-bounding-box [16 16] :origin [8 8]))
     mutant-actor))
 
+(defmethod schutzen.collision.event/on-collision ["mutant" "ship-projectile"]
+  [mutant-actor _]
+  (log "Mutant Collided With projectile!")
+  )

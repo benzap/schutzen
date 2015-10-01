@@ -6,7 +6,8 @@
             [schutzen.graphics.core :as graphics]
             [schutzen.collision.core :as collision]
             [schutzen.array2 :refer [ay= ax=]]
-            [schutzen.physics.damping :as damping]))
+            [schutzen.physics.damping :as damping]
+            [schutzen.collision.event]))
 
 ;; How fast the ship ascends and descends in elevation
 (def ship-elevation-thrust-speed 500.0)
@@ -100,3 +101,15 @@
                assoc :ship-direction :right)
         )
       )))
+
+(defn fire-projectile [actor]
+  (let [position (-> actor :physics :position)
+        ship-direction (-> actor :state deref :ship-direction)]
+    
+    ))
+
+
+;; Collision Events
+(defmethod schutzen.collision.event/on-collision ["ship" "mutant"]
+  [first-actor second-actor]
+  (log "Ship Collided with mutant!"))

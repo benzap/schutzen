@@ -37,16 +37,6 @@
     (player/apply-ship-controls! ship-actor)
     )
 
-  ;; Test Player Projectile
-  (let [ship-projectile-actor (ship-projectile/create)]
-    (a== (-> ship-projectile-actor :physics :position) 
-         (aa 2240 117))
-    (a== (-> ship-projectile-actor :physics :velocity)
-         (aa 1500 0))    
-
-    (state/add-actor! ship-projectile-actor)
-    )
-
   ;;Test Enemy Projectile
   (let [projectile-actor (projectile/create)]
     (a== (-> projectile-actor :physics :position) 
@@ -65,11 +55,10 @@
     )
 
   (doseq [i (range 5)]
-    (let [mutant (actor-manager/allocate-actor! :mutant)
+    (let [mutant (actor-manager/allocate! :mutant)
           [x y] (random/random-location)]
       (a== (-> mutant :physics :position)
            (aa x y))
-      (state/add-actor! mutant)
       ))
 
 )

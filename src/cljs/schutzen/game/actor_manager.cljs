@@ -14,7 +14,7 @@
    :mutant 
    {:creation-fcn
     [schutzen.actors.mutant/create]
-    :reservation 0
+    :reservation 10
     }
    :ship
    {:creation-fcn
@@ -42,8 +42,8 @@
             reservation :reservation}]
           actor-registry]
     (swap! manager assoc actor-name
-           {:allocated #{}
-            :deallocated (into #{} (mapv #(apply creation-fcn args) (range reservation)))})
+           {:allocated []
+            :deallocated (into [] (mapv #(apply creation-fcn args) (range reservation)))})
     ))
 
 (defn allocate-actor! [actor-name]
@@ -62,7 +62,18 @@
       )))
 
 (defn deallocate-actor! [actor-name actor]
-  (swap! manager update-in [actor-name :allocated] disj actor)
+  (swap! manager assoc-in [actor-name :allocated] 
+         (filterv #(not= actor %)
+                  (-> @manager actor-name :allocated)))
   (swap! manager update-in [actor-name :deallocated] conj actor)
   actor
   )
+
+(defn allocate! [actor-name]
+  (let [actor (allocate-actor! actor-name)]
+    (state/add-actor! actor)
+    actor))
+
+(defn deallocate! [actor-name actor]
+  (state/remove-actor! actor)
+  (deallocate-actor! actor-name actor))

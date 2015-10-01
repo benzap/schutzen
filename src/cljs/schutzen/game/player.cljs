@@ -3,7 +3,8 @@
             [schutzen.event :as event]
             [schutzen.array2 :refer [a++ ax+ ay+]]
             [schutzen.actors.ship :as ship]
-            [schutzen.state :as state])
+            [schutzen.state :as state]
+            [schutzen.game.logic.ship-actions])
   (:require-macros [schutzen.event
                     :refer [on-keydown on-keyup on-timeout]]))
 
@@ -71,18 +72,9 @@
    (ship/toggle-ship-direction ship-actor)
    ))
 
-;; Ship-Direction
-
-;; Viewport Testing
-
-(comment
-  (on-keydown 
-   :left
-   (swap! state/game update-in [:viewport :left] + 320)
-   )
-
-  (on-keydown
-   :right
-   (swap! state/game update-in [:viewport :left] - 320)
-   )
-)
+;; Fire
+(on-keydown
+ (:fire player-controls)
+ (when-let [ship-actor @player-actor]
+   (schutzen.game.logic.ship-actions/fire-projectile @player-actor)
+   ))
