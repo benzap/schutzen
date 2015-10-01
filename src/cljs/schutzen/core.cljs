@@ -11,12 +11,14 @@
             [schutzen.scenes.status :refer [create-status-scene]]
             [schutzen.scenes.main-scene.init :refer [create-main-scene]]
             [schutzen.scenes.world-map :refer [create-world-map]]
+
             [schutzen.event :as event]
             [schutzen.camera]
             [schutzen.physics.engine]
             [schutzen.collision.engine]
             [schutzen.globals :refer [*schutzen-active*]]
             [schutzen.game.core :as game]
+            [schutzen.game.actor-manager]
             [schutzen.actors.ship]
             [schutzen.actors.mutant]))
 
@@ -85,6 +87,12 @@
             (schutzen.actors.ship/init-sprites)
             (schutzen.actors.mutant/init-sprites)
 
+            ;;
+            ;; Actor Manager Reservation
+            ;;
+            (log "Reserving Actors...")
+            (schutzen.game.actor-manager/init-manager)
+            
             ;;
             ;; Initializing the scenes
             ;;

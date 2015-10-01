@@ -1,5 +1,6 @@
 (ns schutzen.random
-  (:require [schutzen.utils :refer [log]]))
+  (:require [schutzen.utils :refer [log]]
+            [schutzen.state :as state]))
 
 (def dist-resolution 10000000)
 
@@ -36,3 +37,8 @@
 (defn pick-value-in-range [start end]
   (let [t (- end start)]
     (+ (rand t) start)))
+
+(defn random-location []
+  (let [x (pick-value-in-range 0 state/viewport-width)
+        y (pick-value-in-range 10 (- state/screen-height 10))]
+    [x y]))

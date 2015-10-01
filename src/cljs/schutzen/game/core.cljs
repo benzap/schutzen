@@ -8,9 +8,10 @@
             [schutzen.game.player :as player]
             [schutzen.state :as state]
             [schutzen.array2 :refer [aa a==]]
-            [schutzen.physics.damping :as damping]
             [schutzen.game.landscape]
-            [schutzen.graphics.stars]))
+            [schutzen.graphics.stars]
+            [schutzen.game.actor-manager :as actor-manager]
+            [schutzen.random :as random]))
 
 (defn start-game []
   ;; Generated Stars
@@ -62,4 +63,13 @@
          (aa 2240 240))
     (state/add-actor! mutant-actor)
     )
+
+  (doseq [i (range 5)]
+    (let [mutant (actor-manager/allocate-actor! :mutant)
+          [x y] (random/random-location)]
+      (a== (-> mutant :physics :position)
+           (aa x y))
+      (state/add-actor! mutant)
+      ))
+
 )
