@@ -19,8 +19,15 @@
             [schutzen.globals :refer [*schutzen-active*]]
             [schutzen.game.core :as game]
             [schutzen.game.actor-manager]
+            ;; Actors
             [schutzen.actors.ship]
-            [schutzen.actors.mutant]))
+            [schutzen.actors.mutant]
+            [schutzen.actors.lander]
+            [schutzen.actors.pod]
+            [schutzen.actors.swarmer]
+            [schutzen.actors.baiter]
+            [schutzen.actors.bomber]
+            ))
 
 (declare -init)
 
@@ -86,6 +93,11 @@
             (log "Initializing Actor Assets...")
             (schutzen.actors.ship/init-sprites)
             (schutzen.actors.mutant/init-sprites)
+            (schutzen.actors.lander/init-sprites)
+            (schutzen.actors.pod/init-sprites)
+            (schutzen.actors.swarmer/init-sprites)
+            (schutzen.actors.baiter/init-sprites)
+            (schutzen.actors.bomber/init-sprites)
 
             ;;
             ;; Actor Manager Reservation

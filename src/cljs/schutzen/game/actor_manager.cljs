@@ -5,7 +5,12 @@
             [schutzen.actors.ship]
             [schutzen.actors.ship-projectile]
             [schutzen.actors.mutant]
+            [schutzen.actors.lander]
             [schutzen.actors.projectile]
+            [schutzen.actors.pod]
+            [schutzen.actors.swarmer]
+            [schutzen.actors.baiter]
+            [schutzen.actors.bomber]
             [schutzen.state :as state]))
 
 ;; Includes link to each actor type
@@ -14,7 +19,7 @@
    :mutant 
    {:creation-fcn
     [schutzen.actors.mutant/create]
-    :reservation 10
+    :reservation 20
     }
    :ship
    {:creation-fcn
@@ -29,6 +34,31 @@
    :basic-projectile
    {:creation-fcn 
     [schutzen.actors.projectile/create]
+    :reservation 20
+    }
+   :lander
+   {:creation-fcn
+    [schutzen.actors.lander/create]
+    :reservation 20
+    }
+   :pod
+   {:creation-fcn
+    [schutzen.actors.pod/create]
+    :reservation 20
+    }
+   :swarmer
+   {:creation-fcn
+    [schutzen.actors.swarmer/create]
+    :reservation 20
+    }
+   :baiter
+   {:creation-fcn
+    [schutzen.actors.baiter/create]
+    :reservation 20
+    }
+   :bomber
+   {:creation-fcn
+    [schutzen.actors.bomber/create]
     :reservation 20
     }
    })

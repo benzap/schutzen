@@ -14,11 +14,9 @@
         ship-direction (-> actor :state deref :ship-direction)]
     (condp = ship-direction
       :left
-      (ship-projectile-actions/fire-ship-projectile [(- x-pos x-offset) (- y-pos y-offset)] :left)
+      (ship-projectile-actions/fire-ship-projectile 
+       [(- x-pos x-offset) (- y-pos y-offset)] :left)
       :right
-      (ship-projectile-actions/fire-ship-projectile [(+ x-pos x-offset) (- y-pos y-offset)] :right))
-    (on-timeout 
-     1
-     (deallocate-actor! :ship-projectile))
-    
+      (ship-projectile-actions/fire-ship-projectile 
+       [(+ x-pos x-offset) (- y-pos y-offset)] :right)) 
     ))

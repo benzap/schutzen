@@ -21,6 +21,12 @@
     :ship-left {:url "ship-left.png"}
     :placeholder {:url "placeholder.png"}
     :mutant {:url "mutant.png"}
+    :lander {:url "lander.png"}
+    :pod {:url "pod.png"}
+    :human {:url "human.png"}
+    :swarmer {:url "swarmer.png"}
+    :bomber {:url "bomber.png"}
+    :baiter {:url "baiter.png"}
     }))
 
 (defn download-image

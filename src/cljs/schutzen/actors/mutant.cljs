@@ -5,8 +5,6 @@
             [schutzen.assets :as assets]
             [schutzen.graphics.core :as graphics]
             [schutzen.collision.core :as collision]
-            [schutzen.array2 :refer [ay= ax=]]
-            [schutzen.physics.damping :as damping]
             [schutzen.collision.event]))
 
 (def sprite-mutant-right (atom nil))

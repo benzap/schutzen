@@ -61,11 +61,31 @@
 
 (defmethod draw-actor-on-map ["mutant" :enemy]
   [context actor]
-  (draw-map-point context actor :color "#00ff00"))
+  (draw-map-point context actor :color "#00aa00"))
+
+(defmethod draw-actor-on-map ["pod" :enemy]
+  [context actor]
+  (draw-map-point context actor :color "#ff0000":width 3))
+
+(defmethod draw-actor-on-map ["swarmer" :enemy]
+  [context actor]
+  (draw-map-point context actor :color "#ff33ff":width 2))
+
+(defmethod draw-actor-on-map ["lander" :enemy]
+  [context actor]
+  (draw-map-point context actor :color "#00ff00" :width 3))
 
 (defmethod draw-actor-on-map ["ship" :player]
   [context actor]
   (draw-map-point context actor :color "#ff0000" :width 5))
+
+(defmethod draw-actor-on-map ["baiter" :enemy]
+  [context actor]
+  (draw-map-point context actor :color "#00ff00" :width 3))
+
+(defmethod draw-actor-on-map ["bomber" :enemy]
+  [context actor]
+  (draw-map-point context actor :color "#ffff00" :width 4))
 
 (defmethod draw-actor-on-map ["landscape" :prop]
   [context actor]

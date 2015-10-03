@@ -54,10 +54,47 @@
     (state/add-actor! mutant-actor)
     )
 
-  (doseq [i (range 5)]
+  ;; Randomly generated tests
+
+  (doseq [i (range 2)]
     (let [mutant (actor-manager/allocate! :mutant)
           [x y] (random/random-location)]
       (a== (-> mutant :physics :position)
+           (aa x y))
+      ))
+
+  (doseq [i (range 2)]
+    (let [lander (actor-manager/allocate! :lander)
+          [x y] (random/random-location)]
+      (a== (-> lander :physics :position)
+           (aa x y))
+      ))
+
+  (doseq [i (range 2)]
+    (let [pod (actor-manager/allocate! :pod)
+          [x y] (random/random-location)]
+      (a== (-> pod :physics :position)
+           (aa x y))
+      ))
+
+  (doseq [i (range 2)]
+    (let [swarmer (actor-manager/allocate! :swarmer)
+          [x y] (random/random-location)]
+      (a== (-> swarmer :physics :position)
+           (aa x y))
+      ))
+
+  (doseq [i (range 2)]
+    (let [baiter (actor-manager/allocate! :baiter)
+          [x y] (random/random-location)]
+      (a== (-> baiter :physics :position)
+           (aa x y))
+      ))
+
+  (doseq [i (range 2)]
+    (let [bomber (actor-manager/allocate! :bomber)
+          [x y] (random/random-location)]
+      (a== (-> bomber :physics :position)
            (aa x y))
       ))
 
