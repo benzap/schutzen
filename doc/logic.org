@@ -1,0 +1,21 @@
+* Enemies
+** Lander
+   - travels the surface, and tries to pick up a human
+*** States
+**** Free-mind state
+     - distribution determines the next state
+**** Roaming horizontal
+     - moves in a horizontal line for 1 tick, and moves back to
+       free-mind state
+**** 
+**** Roaming with vertical descent
+** Mutant
+   - a mutant is generated after a lander successfully abducts a human
+** Baiter
+   - after a duration appears in the level
+** Bomber
+   - puts down long lasting bombs that you must avoid
+** Pod
+   - a pod generates swarmers. Roughly 5 swarmers.
+** Swarmer
+   - a small red pellet sided thing

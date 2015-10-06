@@ -10,7 +10,7 @@
             [schutzen.collision.event]))
 
 ;; How fast the ship ascends and descends in elevation
-(def ship-elevation-thrust-speed 500.0)
+(def ship-elevation-thrust-speed 350.0)
 
 ;; How fast the ship accelerates
 (def ship-horizontal-thrust-acceleration 1700.0)

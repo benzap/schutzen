@@ -1,0 +1,39 @@
+@startuml
+
+[*] --> Roaming_1_Tick
+
+state Roaming_1_Tick {
+  [*] --> High_Roaming
+  High_Roaming --> Check_If_Low_Elevation
+  Check_If_Low_Elevation --> Low_Roaming : Low Elevation
+  Check_If_Low_Elevation --> [*]
+  Low_Roaming --> [*] : Check_Cleared
+}
+
+Roaming_1_Tick --> Ship_Proximity_1_Tick
+
+state Ship_Proximity_1_Tick {
+  [*] --> Check_Ship_Proximity
+  Check_Ship_Proximity --> Try_To_Fire_Lazer : In_Proximity
+  Check_Ship_Proximity --> [*]
+  Try_To_Fire_Lazer --> Fire_Lazer : Successful
+  Try_To_Fire_Lazer --> [*]
+  Fire_Lazer --> [*]
+}
+
+Ship_Proximity_1_Tick --> Human_Proximity_1_Tick
+
+state Human_Proximity_1_Tick {
+  [*] --> Is_Low_Elevation
+  Is_Low_Elevation --> [*] : Not_Low_Elevation
+  Is_Low_Elevation --> Check_Human_Proximity : Low_Elevation
+  Check_Human_Proximity --> Stop_And_Lower_Elevation
+  Check_Human_Proximity --> [*]
+  Stop_And_Lower_Elevation --> Pickup_Human
+  Pickup_Human --> Heighten_Elevation_Till_Space
+  Heighten_Elevation_Till_Space --> Turn_Into_Mutant
+  Turn_Into_Mutant --> [*] : Mutant State Sequence Active
+
+}
+
+@enduml
