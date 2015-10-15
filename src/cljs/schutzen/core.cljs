@@ -16,6 +16,7 @@
             [schutzen.camera]
             [schutzen.physics.engine]
             [schutzen.collision.engine]
+            [schutzen.game.logic.engine]
             [schutzen.globals :refer [*schutzen-active*]]
             [schutzen.game.core :as game]
             [schutzen.game.actor-manager]
@@ -45,7 +46,9 @@
     (event/run-timer-system (/ 1 60))
     (schutzen.physics.engine/run-engine (-> @state/game :actors) (/ 1 60))
     (schutzen.collision.engine/run-engine (-> @state/game :actors) (/ 1 60))
-    (schutzen.camera/run-camera-hook (/ 1 60))))
+    (schutzen.camera/run-camera-hook (/ 1 60))
+    (schutzen.game.logic.engine/run-engine (-> @state/game :actors) (/ 1 60))
+    ))
 
 (defn ^:export run []
   (reset! *schutzen-active* true)
