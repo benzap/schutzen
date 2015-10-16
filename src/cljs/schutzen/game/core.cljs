@@ -11,7 +11,8 @@
             [schutzen.game.landscape]
             [schutzen.graphics.stars]
             [schutzen.game.actor-manager :as actor-manager]
-            [schutzen.random :as random]))
+            [schutzen.random :as random]
+            [schutzen.game.logic.core]))
 
 (defn start-game []
   ;; Generated Stars
@@ -36,17 +37,6 @@
     (state/add-actor! ship-actor)
     (player/apply-ship-controls! ship-actor)
     )
-
-  ;;Test Enemy Projectile
-  (let [projectile-actor (projectile/create)]
-    (a== (-> projectile-actor :physics :position) 
-         (aa 2240 200))
-    (a== (-> projectile-actor :physics :velocity)
-         (aa 300 0))    
-
-    (state/add-actor! projectile-actor)
-    )  
-
 
   (let [mutant-actor (mutant/create)]
     (a== (-> mutant-actor :physics :position)

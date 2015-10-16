@@ -38,3 +38,8 @@
   (when-let [current-time (-> actor :state deref :logic-timer)]
     (swap! (-> actor :state) assoc :logic-timer (- current-time time-sec))))
 
+(defn state-timer-finished? [actor]
+  (< (-> actor :state deref :logic-timer) 0))
+
+(defn get-state-arguments [actor]
+  (-> actor :state deref :logic-args))

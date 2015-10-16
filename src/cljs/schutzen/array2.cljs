@@ -28,7 +28,7 @@
   (a** array1 (/ 1 12)) ; (aa 1 2)
 
   ;; assign new values to 2d array. array1 will now be (aa 0 0)
-  (a== array1 (a 0 0)) ; (aa 0 0)
+  (a== array1 (aa 0 0)) ; (aa 0 0)
 ")
 
 (declare ax ay)

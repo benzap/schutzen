@@ -67,3 +67,15 @@
          (filterv #(not= actor %)
                   (-> @game :actors))))
 
+;; actors that need to remain within the bounds of the game area, and
+;; can't go past the top and bottom parts of the screen.
+(def bounded-actors 
+  #{
+    "lander"
+    "mutant"
+    "ship"
+    "bomber"
+    "pod"
+    "baiter"
+    "swarmer"
+    })

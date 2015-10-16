@@ -6,8 +6,6 @@
             [schutzen.array2 :refer [ax= ay= a== aa]]
             ))
 
-
-
 (defn create
   "Create a ship projectile"
   []
