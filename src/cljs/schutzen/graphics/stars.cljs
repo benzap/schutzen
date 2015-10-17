@@ -10,6 +10,28 @@
 (def space-distribution
   [[:star 1.0]])
 
+(def star-color-distribution 
+  [
+   ;; Reds
+   [0.3 "#ff0000"]
+   [0.3 "#F03C02"]
+   [0.3 "#C21A01"]
+
+   ;; Whites
+   [0.8 "#888888"]
+   [0.8 "#ffffff"]
+
+   ;; Greens
+   [0.2 "#00ff00"]
+
+   ;; Blues
+   [0.2 "#0000ff"]
+
+   ;; Other
+   [0.1 "#ffff00"]
+   [0.1 "#00ffff"]
+   ])
+
 (defrecord Star [x-pos y-pos color width])
 
 (defn create-star
@@ -53,7 +75,7 @@
 
 (defn generate-random-star 
   [& {:keys [color width]
-      :or {color "#ffffff"
+      :or {color (random/pick-rand-by-dist star-color-distribution)
            width 3}}]
   (let [x-pos (random/pick-value-in-range left-bound right-bound)
         y-pos (random/pick-value-in-range 10 700)
@@ -83,7 +105,7 @@
   [layer-division num-elements]
   (let [space-list
         (for [i (range num-elements)]
-          (generate-random-star :color "#ffffff" :width 1))]
+          (generate-random-star :width 1))]
     (create-spacelayer space-list layer-division)
     ))
 
