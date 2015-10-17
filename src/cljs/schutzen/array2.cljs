@@ -139,3 +139,8 @@
   (ax* a i)
   (ay* a i)
   a)
+
+(defn a->v 
+  "Convert 2d array to 2 element vector"
+  [a]
+  [(ax a) (ay a)])
