@@ -35,4 +35,6 @@
 
 (defmethod schutzen.collision.event/on-collision ["human" "landscape"]
   [human-actor _]
-  (log "Human is on landscape"))
+  ;;(log "Human is on landscape")
+
+  )

@@ -12,6 +12,7 @@
             [schutzen.graphics.stars]
             [schutzen.game.actor-manager :as actor-manager]
             [schutzen.random :as random]
+            [schutzen.collision.landscape]
             [schutzen.game.logic.core]))
 
 (defn start-game []
@@ -90,7 +91,9 @@
 
   (doseq [i (range 2)]
     (let [human (actor-manager/allocate! :human)
-          [x y] (random/random-location)]
+          [x y] (random/random-location)
+          y (schutzen.collision.landscape/get-landscape-height-at-position x)
+          ]
       (a== (-> human :physics :position)
            (aa x y))
       ))
