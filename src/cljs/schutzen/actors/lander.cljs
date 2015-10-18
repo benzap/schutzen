@@ -32,6 +32,3 @@
   [lander-actor _]
   (log "Lander Collided With projectile!")
   )
-
-(defmethod ai/trigger-actor-state ["lander" :init]
-  [actor])
