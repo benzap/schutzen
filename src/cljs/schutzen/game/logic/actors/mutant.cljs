@@ -26,7 +26,7 @@
 
   ;; Proximity Checks
   (when-let [ship-actor @player/player-actor]
-    (when (sensing/in-proximity? ship-actor actor 200)
+    (when (sensing/in-proximity? ship-actor actor 500)
       (ai/transition-state! actor :chasing)))
   )
 

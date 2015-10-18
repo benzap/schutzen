@@ -16,7 +16,7 @@
 (def ship-horizontal-thrust-acceleration 1700.0)
 
 ;; How fast the ship decelerates
-(def ship-horizontal-damping 0.97)
+(def ship-horizontal-damping 0.985)
 
 ;; Sprites
 (def sprite-ship-right (atom nil))
