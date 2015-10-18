@@ -78,7 +78,9 @@
   transforms -- a map containing transformations
 
   "
-  [img width height & {:keys [origin] :or {origin [0 0]}}]
+  [img width height 
+   & {:keys [origin] 
+      :or {origin [(/ width 2) (/ height 2)]}}]
   (map->Sprite {:img img
                 :width width
                 :height height

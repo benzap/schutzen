@@ -88,4 +88,11 @@
            (aa x y))
       ))
 
+  (doseq [i (range 2)]
+    (let [human (actor-manager/allocate! :human)
+          [x y] (random/random-location)]
+      (a== (-> human :physics :position)
+           (aa x y))
+      ))
+
 )

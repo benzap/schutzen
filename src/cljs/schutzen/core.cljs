@@ -29,6 +29,7 @@
             [schutzen.actors.swarmer]
             [schutzen.actors.baiter]
             [schutzen.actors.bomber]
+            [schutzen.actors.human]
             ))
 
 (declare -init)
@@ -103,6 +104,7 @@
             (schutzen.actors.swarmer/init-sprites)
             (schutzen.actors.baiter/init-sprites)
             (schutzen.actors.bomber/init-sprites)
+            (schutzen.actors.human/init-sprites)
 
             ;;
             ;; Actor Manager Reservation

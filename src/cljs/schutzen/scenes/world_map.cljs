@@ -87,6 +87,10 @@
   [context actor]
   (draw-map-point context actor :color "#ffff00" :width 4))
 
+(defmethod draw-actor-on-map ["human" :friendly]
+  [context actor]
+  (draw-map-point context actor :color "#ffffff" :width 4))
+
 (defmethod draw-actor-on-map ["landscape" :prop]
   [context actor]
   (draw-map-landscape context actor)

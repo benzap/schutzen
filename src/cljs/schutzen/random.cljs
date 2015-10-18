@@ -53,9 +53,18 @@
   (let [degrees (/ degrees 2)
         mag (v/magnitude vec)
         angle (v/angle vec)
-        _ (log "rand - unit" (v/unit vec) angle)
         deg-angle (v/rad->deg angle)
         new-angle (pick-value-in-range (- deg-angle degrees) (+ deg-angle degrees))
         ]
     (-> new-angle v/deg->rad v/rad->unit (v/scalar mag))
     ))
+
+(defn percent-chance
+  "based on a provided percent chance between 0.0-100.0, returns true
+  if it succeeds"
+  [percent]
+  (let [distrib 
+        [[percent true]
+         [(- 100 percent) false]]]
+    (pick-rand-by-dist distrib)))
+

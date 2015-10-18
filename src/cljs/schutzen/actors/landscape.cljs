@@ -6,6 +6,7 @@
             [schutzen.graphics.core :as graphics]
             [schutzen.collision.core :as collision]
             [schutzen.array2 :refer [ax=]]
+            [schutzen.collision.landscape]
             ))
 
 (defn create
@@ -33,5 +34,7 @@
              path-listing 
              :color color 
              :width width))
+    (reset! (-> landscape-actor :collision)
+            (schutzen.collision.landscape/create-landscape-bound))
     landscape-actor
     ))

@@ -11,6 +11,7 @@
             [schutzen.actors.swarmer]
             [schutzen.actors.baiter]
             [schutzen.actors.bomber]
+            [schutzen.actors.human]
             [schutzen.state :as state]))
 
 ;; Includes link to each actor type
@@ -60,6 +61,11 @@
    {:creation-fcn
     [schutzen.actors.bomber/create]
     :reservation 20
+    }
+   :human
+   {:creation-fcn
+    [schutzen.actors.human/create]
+    :reservation 10
     }
    })
 

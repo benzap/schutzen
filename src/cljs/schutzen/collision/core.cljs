@@ -2,7 +2,8 @@
   "Includes collision components for actors, along with functions for
   resolving whether a collision was made between two actors"
   (:require [schutzen.utils :refer [log]]
-            [schutzen.array2 :refer [ax ay]]))
+            [schutzen.array2 :refer [ax ay]]
+            [schutzen.collision.landscape]))
 
 (defrecord CollisionBoundingBox [collision-type dimensions origin])
 
@@ -24,7 +25,10 @@
   - This should be supplied to an Actor object in the :collision atom
 
   "
-  [dimensions & {:keys [origin] :or {origin [0 0]}}]
+  [dimensions 
+   & {:keys [origin] 
+      :or {origin [(-> dimensions first (/ 2))
+                   (-> dimensions second (/ 2))]}}]
   (map->CollisionBoundingBox 
    {:collision-type :bounding-box
     :dimensions dimensions
@@ -70,3 +74,12 @@
         ]
     (and (<= xt wt)
          (<= yt ht))))
+
+(defmethod is-collision?
+  [:bounding-box :landscape-bound]
+  [first-actor second-actor]
+
+  ;; Only check it's a human actor
+  (when (= (-> first-actor :name) "human")
+    (schutzen.collision.landscape/check-landscape-collision first-actor second-actor))
+  )
