@@ -32,5 +32,10 @@
 
 (defmethod ai/trigger-actor-state ["mutant" :chasing]
   [actor]
-  (log "Within proximity, chasing")
+  ;;(log "Within proximity, chasing")
+  ;;(log "Ship is in direction" (sensing/unit-vector-to-actor actor @player/player-actor))
+  (when (ai/state-timer-finished? actor)
+    (shooting/fire-at actor @player/player-actor :precision 0.7)
+    (ai/set-state-timer! actor (random/pick-value-in-range 0.3 0.7))
+    )
   (ai/transition-state! actor :roaming))

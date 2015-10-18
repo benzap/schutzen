@@ -1,6 +1,7 @@
 (ns schutzen.random
   (:require [schutzen.utils :refer [log]]
-            [schutzen.state :as state]))
+            [schutzen.state :as state]
+            [schutzen.vector :as v]))
 
 (def dist-resolution 10000000)
 
@@ -42,3 +43,19 @@
   (let [x (pick-value-in-range 0 state/viewport-width)
         y (pick-value-in-range 10 (- state/screen-height 10))]
     [x y]))
+
+(defn skew-vector-direction
+  "randomly changes the direction of the given vector within the range
+  of degrees"
+  [vec
+   & {:keys [degrees]
+      :or {degrees 10}}]
+  (let [degrees (/ degrees 2)
+        mag (v/magnitude vec)
+        angle (v/angle vec)
+        _ (log "rand - unit" (v/unit vec) angle)
+        deg-angle (v/rad->deg angle)
+        new-angle (pick-value-in-range (- deg-angle degrees) (+ deg-angle degrees))
+        ]
+    (-> new-angle v/deg->rad v/rad->unit (v/scalar mag))
+    ))

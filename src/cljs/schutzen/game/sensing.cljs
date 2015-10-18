@@ -14,15 +14,13 @@
        (* proximity-range proximity-range))
     ))
 
-(defn unit-vector-to-actor 
+(defn unit-vector-to-actor
   "Get the direction vector from one actor, to another"
   [from-actor to-actor]
-  (let [[x1 y1] (a->v (-> to-actor :physics :position))
-        [x2 y2] (a->v (-> second-actor :physics :position))
-
+  (let [[x1 y1] (a->v (-> from-actor :physics :position))
+        [x2 y2] (a->v (-> to-actor :physics :position))
         vx (- x2 x1)
         vy (- y2 y1)
-        t (Math/abs)
-        
         ]
+    (v/unit [vx vy])
     ))
