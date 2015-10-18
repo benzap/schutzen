@@ -54,9 +54,8 @@
    {:keys [speed duration precision]
     :or {speed 500 duration 1.0 precision 0.7}}]
   (let [unit-vector (sensing/unit-vector-to-actor from-actor to-actor)
-        degree-precision (* (- 1.0 precision) 90.0)
+        degree-precision (* (- 1.0 precision) 180.0)
         direction (random/skew-vector-direction unit-vector :degrees degree-precision)
-        _ (log "before-after" unit-vector direction)
         direction (v/scalar direction speed)
         ]
     (fire-from-actor from-actor :velocity direction :duration duration)
