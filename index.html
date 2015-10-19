@@ -26,10 +26,58 @@
 			background-color: #1d1d1d;
 		}
 
+/**/
+
+		.output {
+			-webkit-animation: crt-output 5ms infinite;
+			animation: crt-output 10ms infinite;
+			background-color: #031e11;
+			opacity: 0.1;
+			z-index: 1;
+		}
+
+		@-webkit-keyframes crt-output {
+			0% {
+				opacity: 0.1;
+			}
+			50% {
+				opacity: 0.2;
+			}
+		}
+		@keyframes crt-output {
+			0% {
+				opacity: 0.1;
+			}
+			50% {
+				opacity: 0.2;
+			}
+		}
+		.scanlines {
+			background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 70%, rgba(0, 0, 0, 0.6));
+			background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 70%, rgba(0, 0, 0, 0.6));
+			background-size: 100% 0.3rem;
+			position: absolute;
+		}
+
+		.fill {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 1;
+		}
+
+/**/
+
+
 		</style>
 	</head>
 	<body>
-		<div id="game-container"></div>
+		<div id="game-container">
+			<div class="fill scanlines"></div>
+			<div class="fill output"></div>
+		</div>
 		<script type="text/javascript" src="resources/public/js/third_party/three.min.js"></script>
 		<script type="text/javascript" src="resources/public/js/schutzen.js"></script>
 		<script type="text/javascript">
