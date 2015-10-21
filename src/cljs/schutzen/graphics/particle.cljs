@@ -2,7 +2,7 @@
   "Includes the particle engine and particle groups for generating
   different particle effects"
   (:require [schutzen.utils :refer [log]]
-            [schutzen.array2 :refer [aa ac a== a**i v->a a->v ax= ax ay]]
+            [schutzen.array2 :refer [aa ac a== a**i v->a a->v ax= ax ay a++]]
             [schutzen.graphics.utils]
             [schutzen.canvas.two.core :as c2d]
             [schutzen.state :as state]
@@ -34,15 +34,30 @@
      }))
 
 (defn animate-particle [particle delta-sec]
-  
-  )
+  (let [position (-> particle :position)
+        velocity (-> particle :velocity)
+        mass (-> particle :mass)
+        gravity (* mass 100)
+        damping (-> particle :damping)
+        ]
+
+    ;;acceleration increases velocity by the fraction of time
+    (a++ velocity (a**i (ac (aa 0 gravity)) delta-sec))
+
+    ;;velocity changes position by the fraction of time
+    (a++ position (a**i (ac velocity) delta-sec))
+
+    ;;apply velocity damping
+    (a**i velocity damping)
+    
+    ))
 
 (defn draw-particle [canvas particle]
   (let [[x y] (a->v (-> particle :position))
         width (-> particle :width)
         color (-> particle :color)]
     (c2d/draw-point canvas 
-                    (schutzen.graphics.utils/correct-viewport-offset x :layer-division 2)
+                    (schutzen.graphics.utils/correct-viewport-offset x)
                     y
                     :width width 
                     :color color)
@@ -52,7 +67,7 @@
   (let [position (-> particle :position)
         xp (ax position)
         ]
-    (ax= position (schutzen.graphics.utils/correct-viewport-position xp :layer-division 2))
+    (ax= position (schutzen.graphics.utils/correct-viewport-position xp))
     ))
 
 (defn run-particle-engine [canvas particles delta-sec]

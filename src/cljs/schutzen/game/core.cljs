@@ -100,9 +100,13 @@
            (aa x y))
       ))
 
-  (let [particle 
-        (schutzen.graphics.particle/create-particle [2240 120] [0 0] 10.0)]
-    (state/add-particle! particle)
-    )
-
+  (doseq [i (range 10)]
+    (let [vx (random/pick-value-in-range -200 200)
+          vy (random/pick-value-in-range -200 200)
+          particle
+          (schutzen.graphics.particle/create-particle [2240 120] [vx vy]
+                                                      (random/pick-value-in-range 0.5 1.0))
+          ]
+      (state/add-particle! particle)
+      ))
 )
