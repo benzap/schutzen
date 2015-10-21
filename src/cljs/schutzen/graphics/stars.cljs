@@ -78,8 +78,8 @@
       :or {color (random/pick-rand-by-dist star-color-distribution)
            width 3}}]
   (let [x-pos (random/pick-value-in-range left-bound right-bound)
-        y-pos (random/pick-value-in-range 10 700)
-        ;;(random/pick-value-in-range upper-bound lower-bound)
+        y-pos ;;(random/pick-value-in-range 10 700)
+        (random/pick-value-in-range upper-bound lower-bound)
         ]
     (create-star x-pos y-pos :width width :color color)
     ))
@@ -105,7 +105,7 @@
   [layer-division num-elements]
   (let [space-list
         (for [i (range num-elements)]
-          (generate-random-star :width 1))]
+          (generate-random-star :width (random/pick-value-in-range 0.5 2.0)))]
     (create-spacelayer space-list layer-division)
     ))
 

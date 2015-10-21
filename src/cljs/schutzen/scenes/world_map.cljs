@@ -17,7 +17,7 @@
         y (ay position)
         x-ratio (/ map-width state/viewport-width)
         y-ratio (/ (- map-height 15) state/screen-height)]
-    [(* x x-ratio 2) (* y y-ratio 2)]
+    [(* x x-ratio) (* y y-ratio)]
     ))
 
 (defn draw-map-point 
@@ -41,7 +41,7 @@
         y-ratio (/ (- map-height 15) state/screen-height)
         x-offset (* (- x2 x1) x-ratio 1)
 
-        x1 (/ x 2)
+        x1 (/ x 1)
         y1 (* y1 y-ratio)
         x2 (+ x1 x-offset)
         y2 (* y2 y-ratio)

@@ -101,8 +101,9 @@
    {:keys [color width]
     :or {color "#FFFFFF"
          width 1}}]
-  (aset context "fillStyle" color)
-  (.fillRect context (/ x 2) (/ y 2) width width))
+  (let [offset (/ width 2)]
+    (aset context "fillStyle" color)
+    (.fillRect context (- x offset) (- y offset) width width)))
 
 (defn draw-rect
   "Draws a rectangle at the given location"

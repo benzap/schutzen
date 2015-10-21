@@ -144,3 +144,8 @@
   "Convert 2d array to 2 element vector"
   [a]
   [(ax a) (ay a)])
+
+(defn v->a
+  "Convert 2 element vector into a 2d array"
+  [[x y]]
+  (aa x y))

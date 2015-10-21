@@ -13,7 +13,9 @@
             [schutzen.game.actor-manager :as actor-manager]
             [schutzen.random :as random]
             [schutzen.collision.landscape]
-            [schutzen.game.logic.core]))
+            [schutzen.game.logic.core]
+            [schutzen.graphics.particle]
+            ))
 
 (defn start-game []
   ;; Generated Stars
@@ -97,5 +99,10 @@
       (a== (-> human :physics :position)
            (aa x y))
       ))
+
+  (let [particle 
+        (schutzen.graphics.particle/create-particle [2240 120] [0 0] 10.0)]
+    (state/add-particle! particle)
+    )
 
 )

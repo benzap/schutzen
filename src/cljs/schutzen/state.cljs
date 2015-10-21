@@ -33,6 +33,7 @@
     :actors []
     :viewport {:left 0}
     :spacelayers (atom [])
+    :particles []
     })
   (reset!
    app
@@ -79,3 +80,14 @@
     "baiter"
     "swarmer"
     })
+  
+(defn transform-particles! [f & args]
+  (apply swap! game update-in [:particles] f args))
+
+(defn ^:export add-particle! [particle]
+  (transform-particles! conj particle))
+
+(defn remove-particle! [particle]
+  (swap! game assoc :particles 
+         (filterv #(not= particle %)
+                  (-> @game :particles))))

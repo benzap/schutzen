@@ -6,6 +6,7 @@
             [schutzen.canvas.two.core :as c2d]
             [schutzen.graphics.engine]
             [schutzen.graphics.stars]
+            [schutzen.graphics.particle]
             ))
 
 (defrecord MainScene [context]
@@ -16,10 +17,12 @@
   (run-scene [_ state]
     (log "Running Main Scene"))
 
-  (render-scene [_ state delta-ms]
+  (render-scene [_ state delta-sec]
     (c2d/clear context)
     (schutzen.graphics.stars/draw-space context)
     (schutzen.graphics.engine/run-engine context (-> @state/game :actors))
+    (schutzen.graphics.particle/run-particle-engine 
+     context (-> @state/game :particles) delta-sec)
     )
 
   (pause-scene [_ state]
