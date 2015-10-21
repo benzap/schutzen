@@ -105,7 +105,8 @@
           vy (random/pick-value-in-range -200 200)
           particle
           (schutzen.graphics.particle/create-particle [2240 120] [vx vy]
-                                                      (random/pick-value-in-range 0.5 1.0))
+                                                      (random/pick-value-in-range 1.0 3.0)
+                                                      :mass (random/pick-value-in-range 1.0 5.0))
           ]
       (state/add-particle! particle)
       ))
