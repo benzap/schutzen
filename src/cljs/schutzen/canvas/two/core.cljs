@@ -18,7 +18,11 @@
       (doto context
         (aset "canvas" "width" cwidth)
         (aset "canvas" "height" cheight)
-        (aset "imageSmoothingEnabled" false))
+        (aset "mozImageSmoothingEnabled" false)
+        (aset "webkitImageSmoothingEnabled" false)
+        (aset "msImageSmoothingEnabled" false)
+        (aset "imageSmoothingEnabled" false)
+        )
       (.moveTo context 150 0)
       context)))
 

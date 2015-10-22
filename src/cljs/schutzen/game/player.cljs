@@ -1,10 +1,12 @@
 (ns schutzen.game.player
   (:require [schutzen.utils :refer [log]]
             [schutzen.event :as event]
-            [schutzen.array2 :refer [a++ ax+ ay+]]
+            [schutzen.array2 :refer [a++ ax+ ay+ a->v]]
             [schutzen.actors.ship :as ship]
             [schutzen.state :as state]
-            [schutzen.game.logic.ship-actions])
+            [schutzen.game.logic.ship-actions]
+            [schutzen.graphics.particle]
+            )
   (:require-macros [schutzen.event
                     :refer [on-keydown on-keyup on-timeout]]))
 
@@ -77,4 +79,11 @@
  (:fire player-controls)
  (when-let [ship-actor @player-actor]
    (schutzen.game.logic.ship-actions/fire-projectile @player-actor)
+   (let [[x y] (a->v (-> ship-actor :physics :position))
+         velocity (a->v (-> ship-actor :physics :velocity))]
+     (schutzen.graphics.particle/generate-explosion 
+      x y 
+      :velocity-addition velocity
+      :max-width 5.0)
+     )
    ))
