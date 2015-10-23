@@ -11,8 +11,7 @@
 (defn init-sprites []
   (reset! sprite-pod-right
           (graphics/create-sprite (assets/get-image :pod)
-                                  8 8
-                                  :origin [4 4])))
+                                  12 12)))
 
 (defn create
   "Create the mutant actor"
@@ -20,7 +19,7 @@
   (let [pod-actor (actor/create "pod" :enemy)]
     (reset! (-> pod-actor :graphics) @sprite-pod-right)
     (reset! (-> pod-actor :collision) 
-            (collision/create-bounding-box [16 16] :origin [8 8]))
+            (collision/create-bounding-box [16 16]))
     pod-actor))
 
 (defmethod schutzen.collision.event/on-collision ["mutant" "ship-projectile"]

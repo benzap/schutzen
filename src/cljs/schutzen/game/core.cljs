@@ -99,19 +99,4 @@
       (a== (-> human :physics :position)
            (aa x y))
       ))
-
-  (doseq [i (range 10)]
-    (let [vx (random/pick-value-in-range -400 400)
-          vy (random/pick-value-in-range -400 400)
-          particle
-          (schutzen.graphics.particle/create-particle 
-           [2240 120] [vx vy]
-           (random/pick-value-in-range 0.5 1.5)
-           :mass (random/pick-value-in-range 1.0 5.0)
-           :damping (random/pick-value-in-range 0.97 1.0)
-           :width (random/pick-value-in-range 1.0 1.5)
-           :color "#ff0000")
-          ]
-      (state/add-particle! particle)
-      ))
 )

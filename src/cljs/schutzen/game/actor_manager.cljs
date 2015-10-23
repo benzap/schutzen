@@ -12,6 +12,7 @@
             [schutzen.actors.baiter]
             [schutzen.actors.bomber]
             [schutzen.actors.human]
+            [schutzen.graphics.particle]
             [schutzen.state :as state]))
 
 ;; Includes link to each actor type

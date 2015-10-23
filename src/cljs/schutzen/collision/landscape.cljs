@@ -35,8 +35,12 @@
 
     ;; Based the slope of the landscape, get the height
     (let [path-listing (-> landscape :graphics deref :path-listing)
+          x-pos (ax (-> landscape :physics :position))
           [x1 y1] (first path-listing)
           [x2 y2] (last path-listing)
+          
+          ;;set the x origin to the landscape
+          x (- x x1 x-pos)
 
           ;; inverse the y component
           y1 (- state/screen-height y1)
@@ -47,7 +51,6 @@
 
           ;; get the line slope
           m (/ (- y2 y1) (- x2 x1))
-          
           ;; The height of the point where the actor sits above the landscape
           ya-prime (+ (* m x) y-offset)
           ]

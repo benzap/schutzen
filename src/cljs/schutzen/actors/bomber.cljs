@@ -13,8 +13,7 @@
 (defn init-sprites []
   (reset! sprite-bomber-right 
           (graphics/create-sprite (assets/get-image :bomber)
-                                  8 8
-                                  :origin [4 4])))
+                                  12 12)))
 
 (defn create
   "Create the bomber actor"
@@ -22,7 +21,7 @@
   (let [bomber-actor (actor/create "bomber" :enemy)]
     (reset! (-> bomber-actor :graphics) @sprite-bomber-right)
     (reset! (-> bomber-actor :collision) 
-            (collision/create-bounding-box [8 8] :origin [4 4]))
+            (collision/create-bounding-box [12 12]))
     bomber-actor))
 
 (defmethod schutzen.collision.event/on-collision ["bomber" "ship-projectile"]

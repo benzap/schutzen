@@ -81,9 +81,5 @@
    (schutzen.game.logic.ship-actions/fire-projectile @player-actor)
    (let [[x y] (a->v (-> ship-actor :physics :position))
          velocity (a->v (-> ship-actor :physics :velocity))]
-     (schutzen.graphics.particle/generate-explosion 
-      x y 
-      :velocity-addition velocity
-      :max-width 5.0)
      )
    ))
