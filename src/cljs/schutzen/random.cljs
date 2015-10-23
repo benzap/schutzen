@@ -39,9 +39,12 @@
   (let [t (- end start)]
     (+ (rand t) start)))
 
-(defn random-location []
+(defn random-location 
+  [& {:keys [min-height max-height]
+      :or {min-height 10 
+           max-height (- state/screen-height 10)}}]
   (let [x (pick-value-in-range 0 state/viewport-width)
-        y (pick-value-in-range 10 (- state/screen-height 10))]
+        y (pick-value-in-range min-height max-height)]
     [x y]))
 
 (defn skew-vector-direction

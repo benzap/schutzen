@@ -2,6 +2,7 @@
   (:require [schutzen.utils :refer [log]]
             [schutzen.array2 :refer [ax ay a->v]]
             [schutzen.vector :as v]
+            [schutzen.actors.actor :as actor]
             ))
 
 (defn in-proximity? 
@@ -23,4 +24,15 @@
         vy (- y2 y1)
         ]
     (v/unit [vx vy])
+    ))
+
+(defn in-horizontal-proximity? 
+  [first-actor second-actor 
+   & {:keys [proximity-threshold]
+      :or {proximity-threshold 5}}]
+  (let [[x1 _] (actor/get-world-center first-actor)
+        [x2 _] (actor/get-world-center second-actor)
+        proximity (Math/abs (- x2 x1))
+        ]
+    (< proximity proximity-threshold)
     ))

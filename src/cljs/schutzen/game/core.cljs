@@ -58,7 +58,7 @@
 
   (doseq [i (range 2)]
     (let [lander (actor-manager/allocate! :lander)
-          [x y] (random/random-location)]
+          [x y] (random/random-location :max-height 200)]
       (a== (-> lander :physics :position)
            (aa x y))
       ))
@@ -91,7 +91,7 @@
            (aa x y))
       ))
 
-  (doseq [i (range 2)]
+  (doseq [i (range 10)]
     (let [human (actor-manager/allocate! :human)
           [x y] (random/random-location)
           y (schutzen.collision.landscape/get-landscape-height-at-position x)

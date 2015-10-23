@@ -23,7 +23,9 @@
   (get-world-top-bound [this])
   (get-world-right-bound [this])
   (get-world-bottom-bound [this])
-  (get-world-left-bound [this]))
+  (get-world-left-bound [this])
+  (get-world-center [this])
+  )
 
 ;; Most basic representation for an object being displayed on the
 ;; screen.
@@ -59,7 +61,17 @@
      (-> this :physics :position ax)
      (graphics/get-left-bound (-> this :graphics deref))
      ))
-  )
+  (get-world-center [this]
+    [
+     (/
+      (+ (get-world-left-bound this)
+         (get-world-right-bound this))
+      2)
+     (/
+      (+ (get-world-top-bound this)
+         (get-world-bottom-bound this))
+      2)
+     ]))
 
 (defn create 
   "Create actor with a set of defaults provided

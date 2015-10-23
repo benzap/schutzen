@@ -4,9 +4,10 @@
             [schutzen.random :as random]
             [schutzen.game.movement :as movement]
             [schutzen.game.shooting :as shooting]
-            [schutzen.array2 :refer [ay]]
+            [schutzen.array2 :refer [ay a== aa]]
             [schutzen.game.player :as player]
-            [schutzen.game.sensing :as sensing]))
+            [schutzen.game.sensing :as sensing]
+            [schutzen.state :as state]))
 
 (def low-roaming-transition 240.0)
 
@@ -43,5 +44,19 @@
 
     (ai/set-state-timer! actor (random/pick-value-in-range 0.5 1.0))
     )
+
+  (if-let [humans (filter #(= (:name %) "human")
+                          (-> @state/game :actors))]
+    (doseq [human-actor humans]
+      (when (sensing/in-horizontal-proximity? actor human-actor)
+        (ai/transition-state! actor :beaming-human)
+        )
+      ))
+  )
+
+(defmethod ai/trigger-actor-state ["lander" :beaming-human]
+  [actor]
+  
+  (a== (-> actor :physics :velocity) (aa 0 10))
 
   )

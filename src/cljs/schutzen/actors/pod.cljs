@@ -19,7 +19,7 @@
   (let [pod-actor (actor/create "pod" :enemy)]
     (reset! (-> pod-actor :graphics) @sprite-pod-right)
     (reset! (-> pod-actor :collision) 
-            (collision/create-bounding-box [16 16]))
+            (collision/create-bounding-box [12 12]))
     pod-actor))
 
 (defmethod schutzen.collision.event/on-collision ["mutant" "ship-projectile"]
