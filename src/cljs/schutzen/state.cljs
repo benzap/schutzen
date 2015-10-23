@@ -37,7 +37,8 @@
     })
   (reset!
    app
-   {:assets-path "/resources/public"}))
+   {:dev-mode? true
+    :assets-path "/resources/public"}))
 
 (defn ^:export add-score! [amt]
   (swap! game update-in [:score] + amt))

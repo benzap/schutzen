@@ -49,14 +49,14 @@
 
   ;; Randomly generated tests
 
-  (doseq [i (range 2)]
+  (doseq [i (range 0)]
     (let [mutant (actor-manager/allocate! :mutant)
           [x y] (random/random-location)]
       (a== (-> mutant :physics :position)
            (aa x y))
       ))
 
-  (doseq [i (range 2)]
+  (doseq [i (range 5)]
     (let [lander (actor-manager/allocate! :lander)
           [x y] (random/random-location :max-height 200)]
       (a== (-> lander :physics :position)
@@ -77,7 +77,7 @@
            (aa x y))
       ))
 
-  (doseq [i (range 2)]
+  (doseq [i (range 0)]
     (let [baiter (actor-manager/allocate! :baiter)
           [x y] (random/random-location)]
       (a== (-> baiter :physics :position)

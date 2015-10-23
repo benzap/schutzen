@@ -41,7 +41,7 @@
   IGraphicBounded
   (get-top-bound [this]
     (-> this :origin 
-        (get 1) 
+        (get 1)
         -
         ))
   (get-right-bound [this]

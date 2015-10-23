@@ -4,7 +4,9 @@
             [schutzen.random :as random]
             [schutzen.game.movement :as movement]
             [schutzen.game.shooting :as shooting]
-            [schutzen.array2 :refer [ay a== aa]]
+            [schutzen.collision.event]
+            [schutzen.actors.actor :as actor]
+            [schutzen.array2 :refer [ay a== aa a->v]]
             [schutzen.game.player :as player]
             [schutzen.game.sensing :as sensing]
             [schutzen.state :as state]))
@@ -48,7 +50,8 @@
   (if-let [humans (filter #(= (:name %) "human")
                           (-> @state/game :actors))]
     (doseq [human-actor humans]
-      (when (sensing/in-horizontal-proximity? actor human-actor)
+      (when (sensing/in-horizontal-proximity? actor human-actor
+                                              :proximity-threshold 10)
         (ai/transition-state! actor :beaming-human)
         )
       ))
@@ -56,7 +59,26 @@
 
 (defmethod ai/trigger-actor-state ["lander" :beaming-human]
   [actor]
-  
-  (a== (-> actor :physics :velocity) (aa 0 10))
+  (a== (-> actor :physics :velocity) (aa 0 10)))
 
+;; logic state set when lander collides with human
+(defmethod schutzen.collision.event/on-collision ["lander" "human"]
+  [lander-actor human-actor]
+  (log "Collision!" human-actor)
+  (ai/transition-state! lander-actor :abducting-human human-actor)
   )
+
+(defmethod ai/trigger-actor-state ["lander" :abducting-human]
+  [actor]
+  ;; Start abducting human
+  (a== (-> actor :physics :velocity) (aa 0 -10))
+  (let [human-actor (ai/get-state-arguments actor)]
+    (if-let [human-actor
+             (first (filter #(= % human-actor)
+                            (-> @state/game :actors)))]
+      (let [[cx cy] (actor/get-world-center actor)]
+        (log "moving stuff")
+        (a== (-> human-actor :physics :position) (aa (+ cx 5) (+ cy 16)))
+        )
+      (ai/transition-state! actor :high-roaming)
+    )))

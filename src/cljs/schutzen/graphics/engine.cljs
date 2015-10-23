@@ -6,6 +6,7 @@
             [schutzen.graphics.core :as graphics]
             [schutzen.state :as state]
             [schutzen.canvas.two.core :as c2d]
+            [schutzen.collision.core :as collision]
             [schutzen.graphics.utils]))
 
 (defn correct-actor-position
@@ -44,7 +45,11 @@
         pos-x (ax position)
         pos-y (ay position)
         graphic @(-> actor :graphics)]
-    (graphics/draw graphic canvas pos-x pos-y)))
+    (graphics/draw graphic canvas pos-x pos-y)
+    ;; if in dev-mode, draw the collision bounds
+    (when-let [collision (-> actor :collision deref)]
+      (collision/draw-collision-outline collision canvas pos-x pos-y))
+    ))
 
 (defn run-engine
   "Grabs all of the actors currently contained in the game state, and

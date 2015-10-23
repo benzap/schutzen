@@ -3,9 +3,30 @@
   resolving whether a collision was made between two actors"
   (:require [schutzen.utils :refer [log]]
             [schutzen.array2 :refer [ax ay]]
-            [schutzen.collision.landscape]))
+            [schutzen.collision.landscape]
+            [schutzen.graphics.utils]
+            [schutzen.canvas.two.core :as c2d]
+            ))
 
-(defrecord CollisionBoundingBox [collision-type dimensions origin])
+(defprotocol ICollidable
+  (draw-collision-outline [this canvas x y]))
+
+(extend-protocol ICollidable
+  PersistentArrayMap
+  (draw-collision-outline [this canvas x y]))
+
+(defrecord CollisionBoundingBox [collision-type dimensions origin]
+  ICollidable
+  (draw-collision-outline [this canvas x y]
+    (let [[ox oy] origin
+          px (schutzen.graphics.utils/correct-viewport-offset x)
+          px (- px ox)
+          py (- y ox)
+          [width height] dimensions
+          ]
+      (c2d/draw-rect canvas px py width height :color "#ff0000")
+      )
+    ))
 
 (defn create-bounding-box 
   "Create a collision bounding box
@@ -51,7 +72,8 @@
   (let [first-collision (-> first-actor :collision deref)
         first-position (-> first-actor :physics :position)
         ;; first position with the collision offset
-        x1 (- (ax first-position) (-> first-collision :origin first))
+        x1 (-> first-position ax schutzen.graphics.utils/correct-viewport-offset)
+        x1 (- x1 (-> first-collision :origin first))
         y1 (- (ay first-position) (-> first-collision :origin second))
         ;; first dimensions
         w1 (-> first-collision :dimensions first)
@@ -60,7 +82,8 @@
         second-collision (-> second-actor :collision deref)
         second-position (-> second-actor :physics :position)
         ;; second position with the collision offset
-        x2 (- (ax second-position) (-> second-collision :origin first))
+        x2 (-> second-position ax schutzen.graphics.utils/correct-viewport-offset)
+        x2 (- x2 (-> second-collision :origin first))
         y2 (- (ay second-position) (-> second-collision :origin second))
         ;; second dimensions
         w2 (-> second-collision :dimensions first)

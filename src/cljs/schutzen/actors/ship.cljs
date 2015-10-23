@@ -27,12 +27,10 @@
 (defn init-sprites []
   (reset! sprite-ship-right
           (graphics/create-sprite (assets/get-image :ship-right)
-                                  48 16
-                                  :origin [24 8]))
+                                  32 12))
   (reset! sprite-ship-left
           (graphics/create-sprite (assets/get-image :ship-left)
-                                  48 16
-                                  :origin [24 8]))
+                                  32 12))
   )
 
 (defn create 
@@ -41,7 +39,7 @@
   (let [ship-actor (actor/create "ship" :player)]
     (reset! (-> ship-actor :graphics) @sprite-ship-right)
     (reset! (-> ship-actor :collision) 
-            (collision/create-bounding-box [48 16] :origin [24 8]))
+            (collision/create-bounding-box [32 12]))
     (damping/add-damping! ship-actor 
                           ship-horizontal-damping 
                           :x-axis-only true)

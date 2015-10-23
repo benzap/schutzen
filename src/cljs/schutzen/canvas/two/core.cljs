@@ -112,8 +112,14 @@
 (defn draw-rect
   "Draws a rectangle at the given location"
   [context x y width height & 
-   {:keys [color]
-    :or {color "#ffffff"}}]
-  (aset context "fillStyle" color)
-  (.fillRect context x y width height)
-  )
+   {:keys [color fill?]
+    :or {color "#ffffff"
+         fill? false}}]
+  (if fill?
+    (do
+      (aset context "fillStyle" color)
+      (.fillRect context x y width height))
+    (do
+      (aset context "strokeStyle" color)
+      (.strokeRect context x y width height))
+  ))
