@@ -91,7 +91,7 @@
            (aa x y))
       ))
 
-  (doseq [i (range 10)]
+  (doseq [i (range 1)]
     (let [human (actor-manager/allocate! :human)
           [x y] (random/random-location)
           y (schutzen.collision.landscape/get-landscape-height-at-position x)

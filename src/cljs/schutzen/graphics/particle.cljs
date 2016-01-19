@@ -9,6 +9,8 @@
             [schutzen.random :as random]
             ))
 
+(defprotocol IEffect)
+
 (defrecord Particle 
     [position velocity duration mass damping color width])
 
