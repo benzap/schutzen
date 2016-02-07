@@ -5,3 +5,35 @@
 #+KEYWORDS:    game,clojure
 #+LANGUAGE:    en
 #+OPTIONS:     H:2 num:t toc:t \n:nil ::t |:t ^:t f:t tex:t
+
+* Introduction
+
+*Schutzen* is a clone of the old classic arcade game 'Defender'
+
+* Controls
+
+- Move Up/Down :: W/S
+
+- Thrust :: J
+
+- Change Direction :: Space
+
+- Fire :: K
+
+- Bomb :: l (in developmenet)
+
+- Hyperspace :: g (in development)
+
+* Development Setup
+
+** Setup CLJSBuild Watcher
+   #+BEGIN_SRC sh
+   lein cljsbuild auto
+   #+END_SRC
+
+** Setup Webserver in root folder
+   With Python HTTP Simple Server
+   #+BEGIN_SRC python
+   python -m http.server 8080 # Python 3+
+   python -m HTTPSimpleServer 8080 # Python 2
+   #+END_SRC

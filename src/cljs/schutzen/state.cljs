@@ -37,8 +37,10 @@
     })
   (reset!
    app
-   {:dev-mode? true
-    :assets-path "/resources/public"}))
+   {:show-collision-bounds? false
+    :assets-path "/resources/public"
+    :run-tests? true
+    }))
 
 (defn ^:export add-score! [amt]
   (swap! game update-in [:score] + amt))

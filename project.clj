@@ -8,7 +8,7 @@
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]]
   :plugins [[lein-cljsbuild "1.1.0"]]
   :cljsbuild 
-  {:builds [{:source-paths ["src/cljs"]
+  {:builds [{:source-paths ["src/cljs" "test/cljs"]
              :compiler {:output-to "resources/public/js/schutzen.js" 
                         :output-dir "resources/public/js"
                         :optimizations :whitespace

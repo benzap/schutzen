@@ -48,7 +48,8 @@
     (graphics/draw graphic canvas pos-x pos-y)
     ;; if in dev-mode, draw the collision bounds
     (when-let [collision (-> actor :collision deref)]
-      (collision/draw-collision-outline collision canvas pos-x pos-y))
+      (when (-> @state/app :show-collision-bounds?)
+        (collision/draw-collision-outline collision canvas pos-x pos-y)))
     ))
 
 (defn run-engine

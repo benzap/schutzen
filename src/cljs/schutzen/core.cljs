@@ -66,21 +66,17 @@
 (defn ^:export init [root-dom opts]
   (let [opts (or opts #js {})
         opts (js->clj opts :keywordize-keys true)
-        {:keys [prompt-startup?
-                assets-path]
-         :or {:prompt-startup? false}} opts
         ;; Scene Containers
         containers (init-scene-containers root-dom)]
     ;;initialize our app-state
     (state/init)
     
-    ;;update our assets-path, if provided
-    (when assets-path
-      (swap! state/app assoc-in [:assets-path] assets-path))
+    ;;Update our app state with opts passed values
+    (swap! state/app merge opts)
     
     ;;Load our assets. This will block...
     (log "Loading Assets...")
-    (assets/load-images assets-path)
+    (assets/load-images (-> @state/app :assets-path))
 
     (go    
       (loop [retries 5]

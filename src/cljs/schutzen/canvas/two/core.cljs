@@ -19,7 +19,6 @@
         (aset "canvas" "width" cwidth)
         (aset "canvas" "height" cheight)
         (aset "mozImageSmoothingEnabled" false)
-        (aset "webkitImageSmoothingEnabled" false)
         (aset "msImageSmoothingEnabled" false)
         (aset "imageSmoothingEnabled" false)
         )

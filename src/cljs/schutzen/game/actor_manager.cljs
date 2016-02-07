@@ -15,6 +15,7 @@
             [schutzen.graphics.particle]
             [schutzen.state :as state]))
 
+
 ;; Includes link to each actor type
 (def actor-registry
   {
