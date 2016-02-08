@@ -57,8 +57,13 @@
 		<script type="text/javascript" src="resources/public/js/schutzen.js"></script>
 		<script type="text/javascript">
 		domRoot = document.getElementById("game-container")
-		 schutzen.core.init(domRoot,
-							{"assets-path": "/resources/public/images"});
+		 schutzen.core.init(
+			 domRoot,
+			 {
+				 "assets-path": "/resources/public/images",
+				 "show-collision-bounds?": true,
+				 "run-tests?": true,
+			 });
 		</script>
 	</body>
 </html>

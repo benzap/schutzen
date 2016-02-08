@@ -1,6 +1,7 @@
 (ns schutzen.core
   (:require-macros [cljs.core.async.macros :as am :refer [go]])
-  (:require [cljs.core.async :refer [chan close!]]
+  (:require [cljs.test :refer-macros [run-all-tests]]
+            [cljs.core.async :refer [chan close!]]
             [schutzen.utils :refer [log timeout]]
             [schutzen.display :as display]
             [schutzen.assets :as assets]
@@ -74,6 +75,12 @@
     ;;Update our app state with opts passed values
     (swap! state/app merge opts)
     
+
+    ;; Run our unit tests when :run-tests? is true
+    (when (:run-tests? @state/app)
+      (enable-console-print!)
+      (run-all-tests #"schutzen\.tests.*"))
+
     ;;Load our assets. This will block...
     (log "Loading Assets...")
     (assets/load-images (-> @state/app :assets-path))
