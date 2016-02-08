@@ -16,5 +16,5 @@
 (deftest test-clamp
   (is (utils/clamp 10 8 12) 10)
   (is (utils/clamp 10 12 24) 12)
-  (is (utils/clamp 26 12 24) 24)
-  )
+  (is (utils/clamp 26 12 24) 24))
+
