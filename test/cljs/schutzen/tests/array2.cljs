@@ -37,4 +37,49 @@
   (let [test-array (aa 5 5)]
     (ax+ test-array 1)
     (is (= (ax test-array) 6))
-    ))
+    )
+
+  (let [test-array (aa 5 5)]
+    (ay+ test-array 1)
+    (is (= (ay test-array) 6))
+    )
+
+  (let [test-array (aa 5 5)]
+    (a++ test-array (aa 1 2))
+    (is (= (ax test-array) 6))
+    (is (= (ay test-array) 7))
+    )
+
+  (let [test-array (aa 5 5)
+        new-array (a+ (aa 1 2) test-array)]
+    (is (not= test-array new-array))
+    (is (= (ax new-array) 6))
+    (is (= (ay new-array) 7))
+    )
+
+  )
+
+(deftest test-subtraction
+  (let [test-array (aa 5 5)]
+    (ax- test-array 1)
+    (is (= (ax test-array) 4))
+    )
+
+  (let [test-array (aa 5 5)]
+    (ay- test-array 1)
+    (is (= (ay test-array) 4))
+    )
+
+  (let [test-array (aa 5 5)]
+    (a-- test-array (aa 1 2))
+    (is (= (ax test-array) 4))
+    (is (= (ay test-array) 3))
+    )
+
+  (let [test-array (aa 5 5)
+        new-array (a- (aa 1 2) test-array)]
+    (is (not= test-array new-array))
+    (is (= (ax new-array) -4))
+    (is (= (ay new-array) -3))
+    )
+)
